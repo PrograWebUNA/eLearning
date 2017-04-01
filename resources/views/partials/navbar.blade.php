@@ -14,13 +14,16 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#">About</a>
+                    <a href="/">Inicio</a>
                 </li>
                 <li>
-                    <a href="#">Services</a>
+                    <a href="/courses/catalog">Cursos</a>
                 </li>
                 <li>
-                    <a href="#">Contact</a>
+                    <a href="/account/register">Registrar</a>
+                </li>
+                <li>
+                    <a href="/account/login">Ingresar</a>
                 </li>
             </ul>
         </div>

@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/index', function () {
-       return view('welcome');
-});
+
 Route::get('/', function () {
        return view('content/index');
+});
+
+Route::get('/account/login', function () {
+       return view('content/account/login');
 });
