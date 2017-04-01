@@ -17,9 +17,12 @@ Route::get('/', function () {
 });
 
 Route::get('/account/login', function () {
-       return view('content/account/login');
+       return view('auth/login');
 });
 
+Route::get('/account/register', function () {
+       return view('/auth/register');
+});
 /*ASANCHEZ*/
 Route::get('/courses/create', function () {
        return view('content/courses/create');
@@ -27,3 +30,7 @@ Route::get('/courses/create', function () {
 
 Route::get('/storeCourse', 'coursesController@store');
 /* FIN ASANCHEZ*/
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

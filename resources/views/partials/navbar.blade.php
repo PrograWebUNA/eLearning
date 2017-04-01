@@ -8,23 +8,56 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Start Bootstrap</a>
+            <a class="navbar-brand" href="#">Cursos virtuales</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+              @if (Auth::guest())
                 <li>
                     <a href="/">Inicio</a>
                 </li>
                 <li>
                     <a href="/courses/catalog">Cursos</a>
                 </li>
+
                 <li>
                     <a href="/account/register">Registrar</a>
                 </li>
                 <li>
                     <a href="/account/login">Ingresar</a>
                 </li>
+                @else
+                <li >
+                    <a href="#" >
+                        {{ Auth::user()->name }}
+                    </a>
+                </li>
+                <li class="dropdown">
+                  <a  role="button"  href="/account/login">Mis cursos<span class="caret"></span></a>
+                </li>
+                <li>
+
+                  <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuraciones</a>
+            								<ul class="dropdown-menu">
+            									<li><a href="/courses/create">Crear Curso</a></li>
+            								</ul>
+            							</li>
+
+
+                </li>
+                        <li>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                @endif
             </ul>
         </div>
         <!-- /.navbar-collapse -->
