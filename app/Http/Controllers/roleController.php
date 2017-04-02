@@ -22,4 +22,18 @@ class roleController extends Controller
         $usuarioRol->ESTADO = 1;
         $usuarioRol->save();
     }
+
+    public static function  hasRole($ID_USUARIO, $RoleName)
+    {
+      $id_rol = 0;
+      foreach (Rol::where('NOMBRE', $RoleName)->cursor() as $rol) {
+          $id_rol = $rol->ID_ROL;
+      }
+
+      if (Usuario_rol::where([['ID_USUARIO', '=', $ID_USUARIO], ['ROL', '=', $id_rol]])->exists()) {
+          return true;
+      }else{
+        return false;
+      }
+    }
 }

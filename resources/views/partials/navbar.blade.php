@@ -30,21 +30,23 @@
                 @else
                 <li >
                     <a href="#" >
-                        {{ Auth::user()->name }}
+                        {{ Auth::user()->name  }}
                     </a>
                 </li>
                 <li class="dropdown">
                   <a  role="button"  href="/account/login">Mis cursos<span class="caret"></span></a>
                 </li>
                 <li>
-
+                @if(roleController::hasRole(Auth::user()->ID_USUARIO,"ADMINISTRADOR"))
                   <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuraciones</a>
             								<ul class="dropdown-menu">
             									<li><a href="/courses/create">Crear Curso</a></li>
                               <li><a href="/role/show">Asignar rol</a></li>
-
             								</ul>
-            							</li>
+            		</li>
+                @else
+                <h1>AQUI VA LO QUE SE TIENE QUE MOSTRAR SI NO TIENE EL ROL</h1>
+                @endif
 
 
                 </li>
