@@ -29,6 +29,17 @@ Route::get('/courses/create', function () {
 });
 
 Route::get('/storeCourse', 'coursesController@store');
+
+
+Route::get('/role/show', 'roleController@show');
+Route::get('/role/assign', function () {
+       return view('content/courses/create');
+});
+Route::post('/role/assign', function () {
+       return view('content/courses/create');
+});
+
+Route::get('/role/store', 'roleController@store');
 /* FIN ASANCHEZ*/
 
 Auth::routes();

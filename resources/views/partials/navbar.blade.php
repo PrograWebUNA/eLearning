@@ -41,6 +41,8 @@
                   <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuraciones</a>
             								<ul class="dropdown-menu">
             									<li><a href="/courses/create">Crear Curso</a></li>
+                              <li><a href="/role/show">Asignar rol</a></li>
+
             								</ul>
             							</li>
 
