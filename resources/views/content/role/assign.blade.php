@@ -7,14 +7,14 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Asignar Rol</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="">
+                    <form class="form-horizontal" role="form" action="/role/store" method="post">
                         {{ csrf_field() }}
 
                         <div>
                             <label for="usuario" class="col-md-4 control-label">Usuario</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="usuario" id="usuario" data-parsley-required="true">
+                                <select class="form-control" name="ID_USUARIO" id="ID_USUARIO" data-parsley-required="true">
                                   @foreach ($usuarios as $usuario)
                                   {
                                     <option value="{{ $usuario->ID_USUARIO }}">{{ $usuario->name}}</option>
@@ -28,7 +28,7 @@
                             <label for="rol" class="col-md-4 control-label">Rol</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="rol" id="rol" data-parsley-required="true">
+                                <select class="form-control" name="ROL" id="ROL" data-parsley-required="true">
                                   @foreach ($roles as $rol)
                                   {
                                     <option value="{{ $rol->ID_ROL}}">{{ $rol->NOMBRE }}</option>
