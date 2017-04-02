@@ -32,15 +32,19 @@ Route::get('/storeCourse', 'coursesController@store');
 
 
 Route::get('/role/show', 'roleController@show');
-Route::get('/role/assign', function () {
-       return view('content/courses/create');
-});
-Route::post('/role/assign', function () {
-       return view('content/courses/create');
-});
+
 
 Route::post('/role/store', 'roleController@store');
 /* FIN ASANCHEZ*/
+
+
+/*JUAN JARA*/
+
+Route::get('/showUsers', 'usersController@show');
+
+
+
+/*FIN*/
 
 Auth::routes();
 
