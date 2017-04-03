@@ -17,6 +17,8 @@
     <!-- Custom CSS -->
     <link href="{{ url('css/blog-home.css')}}" rel="stylesheet">
 
+    <link href="{{ url('css/font-awesome.css')}}" rel="stylesheet">
+
 
 
 

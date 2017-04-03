@@ -40,8 +40,14 @@ Route::post('/role/store', 'roleController@store');
 
 /*JUAN JARA*/
 
-Route::get('/showUsers', 'usersController@show');
+Route::get('/showUsers', 'usersController@showAll');
 
+Route::post('/users/modifyUser/users/updateUser','usersController@updateUser');
+
+Route::get('/users/modifyUser/{id}', 'usersController@showUser');
+
+
+Route::get('/users/deleteUser/{id}', 'usersController@delete');
 
 
 /*FIN*/

@@ -5,16 +5,26 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
+                <div class="panel-heading">Modificar Usuario</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
+                    <form class="form-horizontal" role="form"  action="users/updateUser" method="post">
                         {{ csrf_field() }}
 
+                        <div class="form-group{{ $errors->has('ID_USUARIO') ? ' has-error' : '' }}">
+                            <input type='hidden' id="ID_USUARIO" type="text" class="form-control" name="ID_USUARIO" value="{{$usuario->ID_USUARIO}}" required>
+
+                            @if ($errors->has('IDENTIFICACION'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('IDENTIFICACION') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+                            <label for="name" class="col-md-4 control-label">Nombre</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form-control" id="name" name="name" value="{{$usuario->name}}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -25,10 +35,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                            <label for="email" class="col-md-4 control-label">E-Mail</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" id="email" name="email" value="{{$usuario->email}}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -38,32 +48,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
                         <div class="form-group{{ $errors->has('IDENTIFICACION') ? ' has-error' : '' }}">
                             <label for="IDENTIFICACION" class="col-md-4 control-label">Identificaci&oacute;n</label>
 
                             <div class="col-md-6">
-                                <input id="IDENTIFICACION" type="text" class="form-control" name="IDENTIFICACION" value="{{ old('IDENTIFICACION') }}" required>
+                                <input id="IDENTIFICACION" type="text" class="form-control" id="IDENTIFICACION" name="IDENTIFICACION" value="{{$usuario->IDENTIFICACION}}" required>
 
                                 @if ($errors->has('IDENTIFICACION'))
                                     <span class="help-block">
@@ -75,7 +64,7 @@
                         <div class="form-group{{ $errors->has('GENERO') ? ' has-error' : '' }}">
                             <label for="GENERO" class="col-md-4 control-label">Genero</label>
                             <div class="col-md-6">
-                                <select class="form-control" id="GENERO" class="form-control" name="GENERO" value="{{ old('GENERO') }}" required>
+                                <select class="form-control" id="GENERO" class="form-control" name="GENERO" value="{{$usuario->GENERO}}" required>
                                   <option>Masculino</option>
                                   <option>Femenino</option>
                                   <option>Otro</option>
@@ -90,7 +79,7 @@
                         <div class="form-group{{ $errors->has('PAIS') ? ' has-error' : '' }}">
                             <label for="PAIS" class="col-md-4 control-label">Pa&iacute;s</label>
                             <div class="col-md-6">
-                                <select class="form-control" id="PAIS" class="form-control" name="PAIS" value="{{ old('PAIS') }}" required>
+                                <select class="form-control" id="PAIS" class="form-control" name="PAIS" value="{{$usuario->PAIS}}" required>
                                   <option>Costa Rica</option>
                                   <option>Afganistán</option>
                                   <option>Albania</option>
@@ -300,7 +289,7 @@
                         <div class="form-group{{ $errors->has('LENGUAJE') ? ' has-error' : '' }}">
                             <label for="LENGUAJE" class="col-md-4 control-label">Lenguaje</label>
                         <div class="col-md-6">
-                            <select class="form-control" id="LENGUAJE" class="form-control" name="LENGUAJE" value="{{ old('LENGUAJE') }}" required>
+                            <select class="form-control" id="LENGUAJE" class="form-control" name="LENGUAJE" value="{{$usuario->LENGUAJE}}" required>
                               <option>Espa&ntilde;ol</option>
                               <option>Ingl&eacute;s</option>
                               <option>Franc&eacute;s</option>
@@ -311,11 +300,11 @@
                                 </span>
                             @endif
                         </div>
-                      </div>  
+                      </div>
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Modify
+                                    Modificar
                                 </button>
                             </div>
                         </div>
