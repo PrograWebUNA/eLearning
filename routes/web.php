@@ -40,14 +40,36 @@ Route::post('/role/store', 'roleController@store');
 
 /*JUAN JARA*/
 
+/*---------------------------------Users  Routes-------------------------------------*/
+
 Route::get('/showUsers', 'usersController@showAll');
 
 Route::post('/users/modifyUser/users/updateUser','usersController@updateUser');
 
 Route::get('/users/modifyUser/{id}', 'usersController@showUser');
 
-
 Route::get('/users/deleteUser/{id}', 'usersController@delete');
+
+/*-----------------------------------------------------------------------------------*/
+
+
+/*---------------------------------Courses  Routes-------------------------------------*/
+
+Route::get('/showCourses', 'coursesController@showAll');
+
+/*Route::post('/courses/modifyCourse/courses/updateCourse','coursesController@updateUser');
+
+Route::get('/courses/modifyCourse/{id}', 'coursesController@showContoller');
+
+Route::get('/courses/deleteCourse/{id}', 'coursesController@deleteControler');*/
+
+/*-----------------------------------------------------------------------------------*/
+
+
+
+
+
+/*FIN JUAN JARA*/
 
 
 /*FIN*/

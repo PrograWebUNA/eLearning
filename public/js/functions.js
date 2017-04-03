@@ -16,7 +16,7 @@ function numberOfWeeks(){
           window.location.replace(txt);
       } else {
           txt = "/showUsers";
-        
+
       }
 
   }
@@ -31,6 +31,30 @@ function numberOfWeeks(){
           txt = "/showUsers";
 
 
+      }
+
+  }
+
+  function deleteCourse(id) {
+      var txt;
+      var r = confirm("Realmente desea eliminar el Curso?");
+      if (r == true) {
+          txt = "/courses/deleteCourse/"+id;
+          window.location.replace(txt);
+      } else {
+          txt = "/showCourses";
+      }
+
+  }
+
+  function updateCourse(id) {
+      var txt;
+      var r = confirm("Realmente desea actualizar el Curso?");
+      if (r == true) {
+          txt = "/courses/modifyCourse/"+id;
+          window.location.replace(txt);
+      } else {
+          txt = "/showCourses";
       }
 
   }

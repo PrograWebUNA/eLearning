@@ -1,137 +1,45 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="row">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-8 col-md-offset-2">
+                      <div class="panel panel-default">
+                          <div class="panel-heading">Lista de Cursos</div>
+                          <div class="panel-body">
 
-    <!-- Blog Entries Column -->
-    <div class="col-md-8">
+                            <h2>Cursos Activos</h2>
 
-        <h1 class="page-header">
-            Page Heading
-            <small>Secondary Text</small>
-        </h1>
+                              <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>Nombre</th>
+                                    <th>Duraci&oacute;n</th>
+                                    <th>Fecha de Inicio</th>
+                                    <th>Fecha Final</th>
+                                    <th>Semanas</th>
+                                    <th>Modificar</th>
+                                    <th>Eliminar</th>
+                                 </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($courses as $course)
+                                  <tr>
+                                    <td value="{{ $course->ID_CURSO }}">{{$course->NOMBRE}}</td>
+                                    <td value="{{ $course->ID_CURSO }}">{{$course->DURACION}}</td>
+                                    <td value="{{ $course->ID_CURSO }}">{{$course->FECHA_INICIO}}</td>
+                                    <td value="{{ $course->ID_CURSO }}">{{$course->FECHA_FIN}}</td>
+                                    <td value="{{ $course->ID_CURSO }}">{{$course->ESTADO}}</td>
+                                    <td><button  onclick="updateCourse({{ $course->ID_CURSO }})" class="fa fa-pencil" aria-hidden="true" id="modificar" title=""></button></td>
+                                    <td><button  onclick="deleteCourse({{ $course->ID_CURSO }})" class="fa fa-trash-o" aria-hidden="true" id="eliminar"></button></td>
+                                  </tr>
+                                @endforeach
 
-        <!-- First Blog Post -->
-        <h2>
-            <a href="#">Blog Post Title</a>
-        </h2>
-        <p class="lead">
-            by <a href="index.php">Start Bootstrap</a>
-        </p>
-        <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:00 PM</p>
-        <hr>
-        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-        <hr>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.</p>
-        <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
-        <hr>
-
-        <!-- Second Blog Post -->
-        <h2>
-            <a href="#">Blog Post Title</a>
-        </h2>
-        <p class="lead">
-            by <a href="index.php">Start Bootstrap</a>
-        </p>
-        <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:45 PM</p>
-        <hr>
-        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-        <hr>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, quasi, fugiat, asperiores harum voluptatum tenetur a possimus nesciunt quod accusamus saepe tempora ipsam distinctio minima dolorum perferendis labore impedit voluptates!</p>
-        <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
-        <hr>
-
-        <!-- Third Blog Post -->
-        <h2>
-            <a href="#">Blog Post Title</a>
-        </h2>
-        <p class="lead">
-            by <a href="index.php">Start Bootstrap</a>
-        </p>
-        <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:45 PM</p>
-        <hr>
-        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-        <hr>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, voluptates, voluptas dolore ipsam cumque quam veniam accusantium laudantium adipisci architecto itaque dicta aperiam maiores provident id incidunt autem. Magni, ratione.</p>
-        <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
-        <hr>
-
-        <!-- Pager -->
-        <ul class="pager">
-            <li class="previous">
-                <a href="#">&larr; Older</a>
-            </li>
-            <li class="next">
-                <a href="#">Newer &rarr;</a>
-            </li>
-        </ul>
-
-    </div>
-
-    <!-- Blog Sidebar Widgets Column -->
-    <div class="col-md-4">
-
-        <!-- Blog Search Well -->
-        <div class="well">
-            <h4>Blog Search</h4>
-            <div class="input-group">
-                <input type="text" class="form-control">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
-                        <span class="glyphicon glyphicon-search"></span>
-                </button>
-                </span>
-            </div>
-            <!-- /.input-group -->
-        </div>
-
-        <!-- Blog Categories Well -->
-        <div class="well">
-            <h4>Blog Categories</h4>
-            <div class="row">
-                <div class="col-lg-6">
-                    <ul class="list-unstyled">
-                        <li><a href="#">Category Name</a>
-                        </li>
-                        <li><a href="#">Category Name</a>
-                        </li>
-                        <li><a href="#">Category Name</a>
-                        </li>
-                        <li><a href="#">Category Name</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.col-lg-6 -->
-                <div class="col-lg-6">
-                    <ul class="list-unstyled">
-                        <li><a href="#">Category Name</a>
-                        </li>
-                        <li><a href="#">Category Name</a>
-                        </li>
-                        <li><a href="#">Category Name</a>
-                        </li>
-                        <li><a href="#">Category Name</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.col-lg-6 -->
-            </div>
-            <!-- /.row -->
-        </div>
-
-        <!-- Side Widget Well -->
-        <div class="well">
-            <h4>Side Widget Well</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
-        </div>
-
-    </div>
-
-</div>
-<!-- /.row -->
-
-<hr>
+                                </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
 @endsection
