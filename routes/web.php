@@ -57,11 +57,13 @@ Route::get('/users/deleteUser/{id}', 'usersController@delete');
 
 Route::get('/showCourses', 'coursesController@showAll');
 
-/*Route::post('/courses/modifyCourse/courses/updateCourse','coursesController@updateUser');
+Route::post('/courses/modifyCourse/courses/updateCourse','coursesController@updateCourse');
 
-Route::get('/courses/modifyCourse/{id}', 'coursesController@showContoller');
+Route::get('/courses/modifyCourse/{id}', 'coursesController@showCourse');
 
-Route::get('/courses/deleteCourse/{id}', 'coursesController@deleteControler');*/
+Route::get('/courses/deleteCourse/{id}', 'coursesController@delete');
+
+
 
 /*-----------------------------------------------------------------------------------*/
 

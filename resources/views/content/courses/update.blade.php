@@ -1,137 +1,67 @@
-@extends('layouts.master')
+  @extends('layouts.master')
 
-@section('content')
-<div class="row">
+  @section('content')
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+          <div class="panel-heading">Modificar Curso</div>
+          <div class="panel-body">
+            <form class="form-horizontal" role="form"  action="courses/updateCourse" method="post">
+              {{ csrf_field() }}
 
-    <!-- Blog Entries Column -->
-    <div class="col-md-8">
+              <div class="form-group{{ $errors->has('ID_CURSO') ? ' has-error' : '' }}">
+                <input type='hidden' id="ID_CURSO" type="text" class="form-control" name="ID_CURSO" value="{{$course->ID_CURSO}}" required>
 
-        <h1 class="page-header">
-            Page Heading
-            <small>Secondary Text</small>
-        </h1>
-
-        <!-- First Blog Post -->
-        <h2>
-            <a href="#">Blog Post Title</a>
-        </h2>
-        <p class="lead">
-            by <a href="index.php">Start Bootstrap</a>
-        </p>
-        <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:00 PM</p>
-        <hr>
-        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-        <hr>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.</p>
-        <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
-        <hr>
-
-        <!-- Second Blog Post -->
-        <h2>
-            <a href="#">Blog Post Title</a>
-        </h2>
-        <p class="lead">
-            by <a href="index.php">Start Bootstrap</a>
-        </p>
-        <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:45 PM</p>
-        <hr>
-        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-        <hr>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, quasi, fugiat, asperiores harum voluptatum tenetur a possimus nesciunt quod accusamus saepe tempora ipsam distinctio minima dolorum perferendis labore impedit voluptates!</p>
-        <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
-        <hr>
-
-        <!-- Third Blog Post -->
-        <h2>
-            <a href="#">Blog Post Title</a>
-        </h2>
-        <p class="lead">
-            by <a href="index.php">Start Bootstrap</a>
-        </p>
-        <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:45 PM</p>
-        <hr>
-        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-        <hr>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, voluptates, voluptas dolore ipsam cumque quam veniam accusantium laudantium adipisci architecto itaque dicta aperiam maiores provident id incidunt autem. Magni, ratione.</p>
-        <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
-        <hr>
-
-        <!-- Pager -->
-        <ul class="pager">
-            <li class="previous">
-                <a href="#">&larr; Older</a>
-            </li>
-            <li class="next">
-                <a href="#">Newer &rarr;</a>
-            </li>
-        </ul>
-
-    </div>
-
-    <!-- Blog Sidebar Widgets Column -->
-    <div class="col-md-4">
-
-        <!-- Blog Search Well -->
-        <div class="well">
-            <h4>Blog Search</h4>
-            <div class="input-group">
-                <input type="text" class="form-control">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
-                        <span class="glyphicon glyphicon-search"></span>
-                </button>
+                @if ($errors->has('ID_CURSO'))
+                <span class="help-block">
+                  <strong>{{ $errors->first('ID_CURSO') }}</strong>
                 </span>
-            </div>
-            <!-- /.input-group -->
-        </div>
+                @endif
+              </div>
 
-        <!-- Blog Categories Well -->
-        <div class="well">
-            <h4>Blog Categories</h4>
-            <div class="row">
-                <div class="col-lg-6">
-                    <ul class="list-unstyled">
-                        <li><a href="#">Category Name</a>
-                        </li>
-                        <li><a href="#">Category Name</a>
-                        </li>
-                        <li><a href="#">Category Name</a>
-                        </li>
-                        <li><a href="#">Category Name</a>
-                        </li>
-                    </ul>
+              <div class="form-group{{ $errors->has('NOMBRE') ? ' has-error' : '' }}">
+                <label for="NOMBRE" class="col-md-4 control-label">Nombre del Curso:</label>
+
+                <div class="col-md-6">
+                  <input  type="text" class="form-control" id="NOMBRE" name="NOMBRE" value="{{$course->NOMBRE}}" required autofocus>
+
+                  @if ($errors->has('NOMBRE'))
+                  <span class="help-block">
+                    <strong>{{ $errors->first('NOMBRE') }}</strong>
+                  </span>
+                  @endif
                 </div>
-                <!-- /.col-lg-6 -->
-                <div class="col-lg-6">
-                    <ul class="list-unstyled">
-                        <li><a href="#">Category Name</a>
-                        </li>
-                        <li><a href="#">Category Name</a>
-                        </li>
-                        <li><a href="#">Category Name</a>
-                        </li>
-                        <li><a href="#">Category Name</a>
-                        </li>
-                    </ul>
+              </div>
+
+              <div class="form-group">
+                <label for="fechaIni">Inicio del Curso:</label>
+                <input type="date" class="form-control" id="FECHA_INICIO" onblur="numberOfWeeks();" value="{{$course->FECHA_INICIO}}" name="FECHA_INICIO">
+              </div>
+
+              <div class="form-group">
+                <label for="fechaFin">Fecha final del Curso:</label>
+                <input type="date" class="form-control" id="FECHA_FIN" name="FECHA_FIN" value="{{$course->FECHA_INICIO}}" onblur="numberOfWeeks();">
+              </div>
+
+              <div class="form-group">
+                <label for="fechaFin">Numero de Semanas:</label>
+                <input type="text" class="form-control" id="DURACION" value="{{$course->DURACION}}" readonly name="DURACION">
+
+                <input type="hidden" class="form-control" id="ESTADO"  value="{{$course->ESTADO}}" readonly name="ESTADO">
+              </div>
+
+              <div class="form-group">
+                <div class="col-md-6 col-md-offset-4">
+                  <button type="submit" class="btn btn-primary">
+                    Modificar
+                  </button>
                 </div>
-                <!-- /.col-lg-6 -->
-            </div>
-            <!-- /.row -->
+              </div>
+            </form>
+          </div>
         </div>
-
-        <!-- Side Widget Well -->
-        <div class="well">
-            <h4>Side Widget Well</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
-        </div>
-
+      </div>
     </div>
-
-</div>
-<!-- /.row -->
-
-<hr>
-@endsection
+  </div>
+  @endsection

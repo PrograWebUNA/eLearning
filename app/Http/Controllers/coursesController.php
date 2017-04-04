@@ -36,21 +36,38 @@ public function showAll(){
 
 public function showCourse($id){
   $course = Courses::find($id);
-  return view('content.courses.modifyCourse', compact('usuario'));
+  return view('content.courses.update', compact('course'));
 }
 
 
 
 public function updateCourse(Request $request)
 {
+  dd("Entro enupdate  ".$request->ID_CURSO);
     $course = Courses::find($request->ID_CURSO);
-    $course->NOMBRE = $request->NOMBRE;
-    $course->DURACION = $request->DURACION;
-    $course->FECHA_INICIO = $request->FECHA_INICIO;
-    $course->FECHA_FIN = $request->FECHA_FIN;
-    $course->ESTADO = $request->ESTADO;
+
+    if (is_null ($course))
+    {
+        App::abort(404);
+    }
+    $course->nombre = $request->NOMBRE;
+    $course->duracion = $request->DURACION;
+    $course->fecha_inicio = $request->FECHA_INICIO;
+    $course->fecha_final = $request->FECHA_FIN;
+    $course->estado = $request->ESTADO;
     $course->save();
 }
+
+
+    public function delete($id){
+      $course = Courses::find($id);
+      $course->delete();
+      /*return view('content.index');*/
+      /*return redirect()->route('/showUsers');*/
+     dd("Se Elimino con exito el curso:  ".$course->NOMBRE);
+    }
+
+
 
 
 }
