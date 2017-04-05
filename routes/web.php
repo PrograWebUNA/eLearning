@@ -76,6 +76,25 @@ Route::get('/courses/deleteCourse/{id}', 'coursesController@delete');
 
 /*FIN*/
 
+
+/*AMONTERO*/
+
+/* ---------------Routes matricula-------------------------*/
+Route::get('/enroll/show', 'matriculaController@show');
+
+Route::get('/enroll/showMatriculas', 'matriculaController@showAll');
+
+Route::get('/enroll/deleteMatricula/{id}', 'matriculaController@delete');
+
+Route::get('/enroll/updateMatricula/{id}', 'matriculaController@update');
+
+Route::get('/enroll/create', function () {
+       return view('content/enroll/create');
+});
+
+Route::post('/enroll/store', 'matriculaController@store');
+/*FIN AMONTERO*/
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');

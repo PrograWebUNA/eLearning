@@ -13,8 +13,29 @@ class matriculaController extends Controller
     public function show(){
       $usuarios = User::orderBy('ID_USUARIO')->get();
       $courses = Courses::orderBy('ID_Curso')->get();
-     return view('content.enroll.join', compact('usuarios','courses'));
+     return view('content.enroll.create', compact('usuarios','courses'));
     }
+
+    public function showAll(){
+      $matriculas = Matricula::orderBy('ID_MATRICULA')->get();
+     return view('content.enroll.catalog', compact('matriculas'));
+    }
+
+
+public function delete($id){
+        $matricula=Matricula::find($id);
+        $matricula->delete();
+        return redirect('enroll/showMatriculas');
+
+}
+
+public function update($id){
+        $matricula=Matricula::find($id);
+        $matriculaUpdate = $request->all();
+        $matricula->update($matriculaUpdate);
+        return redirect('enroll/showMatriculas');
+
+}
 
 	public function store(Request $request)
     {
@@ -26,6 +47,7 @@ class matriculaController extends Controller
 		$matricula->FECHA_MATRICULA = $request->FECHA_MATRICULA;
 		$matricula->ANIO = $request->ANIO;
         $matricula->save();
+      return redirect('enroll/showMatriculas');
 
     }
 

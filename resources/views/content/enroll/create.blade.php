@@ -90,10 +90,6 @@
                                     Matricular
                                 </button>
 
-								<input type="submit" class="btn btn-primar" id="submit"  name="submit"  value="enviar" >
-
-
-								<div id="respuesta"></div>
 
                             </div>
                         </div>

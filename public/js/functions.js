@@ -58,3 +58,35 @@ function numberOfWeeks(){
       }
 
   }
+
+
+  /*AMONTERO*/
+
+  function deleteMatricula(id) {
+      var txt;
+      var r = confirm("Realmente desea eliminar la matricula?");
+      if (r == true) {
+          txt = "/enroll/deleteMatricula/"+id;
+          window.location.replace(txt);
+      } else {
+          txt = "/showMatriculas";
+
+      }
+
+  }
+
+  function updateMatricula(id) {
+      var txt;
+      var r = confirm("Realmente desea modificar la matricula?");
+      if (r == true) {
+          txt = "/enroll/updateMatricula/"+id;
+          window.location.replace(txt);
+      } else {
+          txt = "/showMatriculas";
+
+      }
+
+  }
+
+
+  /*Fin AMONTERO*/
