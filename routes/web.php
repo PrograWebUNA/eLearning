@@ -86,13 +86,15 @@ Route::get('/enroll/showMatriculas', 'matriculaController@showAll');
 
 Route::get('/enroll/deleteMatricula/{id}', 'matriculaController@delete');
 
-Route::get('/enroll/updateMatricula/{id}', 'matriculaController@update');
+Route::get('/enroll/editMatricula/{id}', 'matriculaController@edit');
 
 Route::get('/enroll/create', function () {
        return view('content/enroll/create');
 });
 
 Route::post('/enroll/store', 'matriculaController@store');
+
+Route::post('/enroll/editMatricula/enroll/updateMatricula', 'matriculaController@update');
 /*FIN AMONTERO*/
 
 Auth::routes();

@@ -79,7 +79,7 @@ function numberOfWeeks(){
       var txt;
       var r = confirm("Realmente desea modificar la matricula?");
       if (r == true) {
-          txt = "/enroll/updateMatricula/"+id;
+          txt = "/enroll/editMatricula/"+id;
           window.location.replace(txt);
       } else {
           txt = "/showMatriculas";

@@ -18,6 +18,7 @@ class matriculaController extends Controller
 
     public function showAll(){
       $matriculas = Matricula::orderBy('ID_MATRICULA')->get();
+    //  $course = DB::table('curso')->get();
      return view('content.enroll.catalog', compact('matriculas'));
     }
 
@@ -29,13 +30,21 @@ public function delete($id){
 
 }
 
-public function update($id){
-        $matricula=Matricula::find($id);
+public function update(Request $request){
+        $matricula=Matricula::find($request->ID_MATRICULA);
         $matriculaUpdate = $request->all();
         $matricula->update($matriculaUpdate);
         return redirect('enroll/showMatriculas');
 
 }
+
+public function edit($id)
+ {
+     $matricula = Matricula::find($id);
+     $courses = DB::table('curso')->get();
+     return view('content.enroll.update', compact('matricula', 'courses'));
+ }
+
 
 	public function store(Request $request)
     {

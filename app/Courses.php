@@ -11,4 +11,10 @@ class Courses extends Model
   public $timestamps = false;
   protected $fillable = ['nombre', 'duracion', 'fecha_inicio', 'fecha_final','estado'];
     //
+
+
+    public function matriculas()
+    {
+       return $this->hasMany('App\Matricula');
+    }
 }
