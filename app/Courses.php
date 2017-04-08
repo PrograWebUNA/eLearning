@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Courses extends Model
 {
   protected $table = 'CURSO';
-  protected $primaryKey = 'id_curso';
+  protected $primaryKey = 'ID_CURSO';
   public $timestamps = false;
-  protected $fillable = ['nombre', 'duracion', 'fecha_inicio', 'fecha_final','estado'];
+  protected $fillable = ['NOMBRE', 'DURACION', 'FECHA_INICIO', 'FECHA_FINAL','ESTADO'];
     //
 
 
