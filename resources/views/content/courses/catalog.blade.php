@@ -17,7 +17,7 @@
                                     <th>Duraci&oacute;n</th>
                                     <th>Fecha de Inicio</th>
                                     <th>Fecha Final</th>
-                                    <th>Semanas</th>
+                                    <th>Estado</th>
                                     <th>Modificar</th>
                                     <th>Eliminar</th>
                                  </tr>

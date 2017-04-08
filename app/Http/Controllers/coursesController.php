@@ -28,6 +28,12 @@ public function store(Request $request)
 }
 
 
+public function showCoursesIndex(){
+  $courses = Courses::orderBy('ID_CURSO')->get();
+  return view('content.index', compact('courses'));
+}
+
+
 public function showAll(){
   $courses = Courses::orderBy('ID_CURSO')->get();
  return view('content.courses.catalog', compact('courses'));
