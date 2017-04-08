@@ -63,7 +63,6 @@ Route::get('/courses/modifyCourse/{id}', 'coursesController@showCourse');
 
 Route::get('/courses/deleteCourse/{id}', 'coursesController@delete');
 
-courses/modifyCourse/courses/updateCourse
 
 /*-----------------------------------------------------------------------------------*/
 

@@ -43,24 +43,13 @@ public function showCourse($id){
 
 public function updateCourse(Request $request)
 {
-  dd("Entro enupdate  ".$request->ID_CURSO);
-  dd("CURSO NOMBRE:   ".$request->NOMBRE);
-  dd("CURSO DURACION:   ".$request->DURACION);
-  dd("CURSO FECHA INICIO:   ".$request->FECHA_INICIO);
-  dd("CURSO FECHA FIN:   ".$request->FECHA_FIN);
-  dd("CURSO ESTADO:   ".$request->ESTADO);
-
     $course = Courses::find($request->ID_CURSO);
 
-    if (is_null ($course))
-    {
-        App::abort(404);
-    }
-    $course->NOMBRE = $request->nombre;
-    $course->DURACION = $request->duracion;
-    $course->FECHA_INICIO = $request->fecha_inicio;
-    $course->FECHA_FINAL = $request->fecha_fin;
-    $course->ESTADO = $request->estado;
+    $course->NOMBRE = $request->NOMBRE;
+    $course->DURACION = $request->DURACION;
+    $course->FECHA_INICIO = $request->FECHA_INICIO;
+    $course->FECHA_FIN = $request->FECHA_FIN;
+    $course->ESTADO = $request->ESTADO;
     $course->save();
 }
 

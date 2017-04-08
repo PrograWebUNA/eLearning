@@ -24,7 +24,7 @@
                 <label for="NOMBRE" class="col-md-4 control-label">Nombre del Curso:</label>
 
                 <div class="col-md-6">
-                  <input  type="text" class="form-control" id="nombre" name="nombre" value="{{$course->NOMBRE}}" required autofocus>
+                  <input  type="text" class="form-control" id="NOMBRE" name="NOMBRE" value="{{$course->NOMBRE}}" required autofocus>
 
                   @if ($errors->has('NOMBRE'))
                   <span class="help-block">
@@ -36,19 +36,19 @@
 
               <div class="form-group">
                 <label for="fechaIni">Inicio del Curso:</label>
-                <input type="date" class="form-control" id="fecha_inicio" onblur="numberOfWeeks();" value="{{$course->FECHA_INICIO}}" name="fecha_inicio">
+                <input type="date" class="form-control" id="FECHA_INICIO" onblur="numberOfWeeks();" value="{{$course->FECHA_INICIO}}" name="FECHA_INICIO">
               </div>
 
               <div class="form-group">
                 <label for="fechaFin">Fecha final del Curso:</label>
-                <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" value="{{$course->FECHA_FIN}}" onblur="numberOfWeeks();">
+                <input type="date" class="form-control" id="FECHA_FIN" name="FECHA_FIN" value="{{$course->FECHA_FIN}}" onblur="numberOfWeeks();">
               </div>
 
               <div class="form-group">
                 <label for="fechaFin">Numero de Semanas:</label>
-                <input type="text" class="form-control" id="duracion"  name="duracion" value="{{$course->DURACION}}" readonly >
+                <input type="text" class="form-control" id="DURACION"  name="DURACION" value="{{$course->DURACION}}" readonly >
 
-                <input type="hidden" class="form-control" id="estado" name="estado" value="{{$course->ESTADO}}" readonly >
+                <input type="hidden" class="form-control" id="ESTADO" name="ESTADO" value="{{$course->ESTADO}}" readonly >
               </div>
 
               <div class="form-group">
