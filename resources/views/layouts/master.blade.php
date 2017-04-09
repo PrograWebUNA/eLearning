@@ -49,7 +49,7 @@
 
     <!-- jQuery -->
     <script src="{{ url('js/jquery.js') }}"></script>
-
+    <script src="{{ url('js/jquery.mjs.nestedSortable.js') }}"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ url('js/bootstrap.min.js') }}"></script>
     <!-- Customize script -->
