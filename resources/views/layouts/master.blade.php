@@ -52,6 +52,9 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ url('js/bootstrap.min.js') }}"></script>
+
+    <!-- Noty -->
+    <script src="{{ url('js/noty/packaged/jquery.noty.packaged.min.js') }}"></script>
     <!-- Customize script -->
     <script src="{{ url('js/functions.js') }}"></script>
 

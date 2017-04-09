@@ -90,3 +90,29 @@ function numberOfWeeks(){
 
 
   /*Fin AMONTERO*/
+
+
+  /*Storage data using ajax*/
+  $(document).ready(function() {
+    $( "#resourceForm" ).submit(function( e ) {
+        alert("estoy aqui");
+       var data = $("#resourceForm").serialize();
+       e.preventDefault();
+          $.ajax({
+              type: 'POST',
+              url: '/resource/store',
+              data: data,
+              success: function(data) {
+                $.noty.consumeAlert({layout: 'topRight', type: 'error', dismissQueue: true});
+
+                alert(data);
+               console.log(data);
+
+              },
+              error: function(data) {
+                  alert("error");
+              }
+          });
+          return false;
+      });
+  });

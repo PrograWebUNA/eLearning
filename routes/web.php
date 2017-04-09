@@ -35,8 +35,21 @@ Route::get('/role/show', 'roleController@show');
 
 
 Route::post('/role/store', 'roleController@store');
-/* FIN ASANCHEZ*/
 
+/*---------------------------------Resources  Routes-------------------------------------*/
+Route::get('resource/list', 'recursosController@showAll');
+
+Route::get('resource/show/{id_usuario}', 'recursosController@show');
+
+Route::post('/resource/store','recursosController@store');
+
+Route::post('/resource/update','recursosController@update');
+
+Route::get('/resource/update/{id}', 'recursosController@getForUpdate');
+
+Route::get('/resource/delete/{id}', 'recursosController@delete');
+
+/* FIN ASANCHEZ*/
 
 /*JUAN JARA*/
 
