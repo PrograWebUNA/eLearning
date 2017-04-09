@@ -27,7 +27,7 @@
 
 
 						<div class="form-group" >
-							  <label for="NOMBRE_USUARIO" class="col-md-4 control-label">Usuario</label>
+							  <label for="NOMBRE_USUARIO" class="col-md-4 control-label" >Usuario</label>
 
 							   <div class="col-md-6 ">
 							  <input type="text" class="form-control" id="NOMBRE_USUARIO"

@@ -89,125 +89,25 @@ function numberOfWeeks(){
   }
 
 
-  /*Metodos para drag and drop*/
+  
+/*Otra forma*/
 
-  /* when the DOM is ready */
-jQuery(document).ready(function() {
-	/* grab important elements */
-	var sortInput = jQuery('#sort_order');
-	var submit = jQuery('#autoSubmit');
-	var messageBox = jQuery('#message-box');
-	var list = jQuery('#sortable-list');
-	/* create requesting function to avoid duplicate code */
-	var request = function() {
-		$.ajax({
-    // En data puedes utilizar un objeto JSON, un array o un query string
-    //data: {"sort_order" : sortInput.val(), "do_submit" : 1, "byajax" : 1},
-    data:"sort_order=" + sortInput.val() + "&do_submit=1&byajax=1",
-    //Cambiar a type: POST si necesario
-    type: "GET",
-    // Formato de datos que se espera en la respuesta
-    //dataType: "json",
-    // URL a la que se enviará la solicitud Ajax
-    url: "index.php",
- //   contentType: "json",
-})
- .done(function( data, textStatus, jqXHR ) {
-     if ( console && console.log ) {
-     	console.log(jqXHR);
-         console.log( "La solicitud se ha completado correctamente." );
-     }
- })
- .fail(function( jqXHR, textStatus, errorThrown ) {
-     if ( console && console.log ) {
-         console.log(jqXHR);
-
-     }
+$(document).ready(function(){
+    $( ".draggable" ).draggable({
+    start: function( event, ui ) {
+        var id = $(this).closest(".draggable").attr('id');
+    }
 });
-	};
 
-	/* worker function */
-	var fnSubmit = function(save) {
-		var sortOrder = [];
-
-		list.each(function(){
-			$(this).children().each(function () {
-        	var $currentElement = $(this);
-        	if($currentElement.is( "li" )){
-        		values = jQuery(this).data('id').split("_");
-				sortOrder.push({'nameid':jQuery(this).data('id'), 'id':values[1]});
-        	}else{
-        		$currentElement.children('li').each(function(){
-        			$current = $(this);
-        			values = $current.attr('id').split("_");
-					sortOrder.push({'nameid':jQuery(this).data('id'), 'id':values[1]});
-        		});
-        	}
-    		});
-		});
-
-
-		sortInput.val($.toJSON(sortOrder)/*sortOrder.join(',')*/);
-		console.log(sortInput.val());
-		if(save) {
-			request();
-		}
-	};
-	/* store values */
-	list.children('li').each(function() {
-		var li = jQuery(this);
-		li.data('id',li.attr('id')).attr('id','');
-	});
-
-
-
-	/* sortables */
-	list.sortable({
-		opacity: 0.7,
-		update: function() {
-			fnSubmit(submit[0].checked);
-		}
-	});
-	list.disableSelection();
-
-
-/*	list.each(function(){
-		$(this).children().each(function () {
-        	var $currentElement = $(this);
-        	if($currentElement.is( "ul" )){
-				$currentElement.sortable({
-					opacity: 0.7,
-					update: function() {
-					fnSubmit(submit[0].checked);
-					}
-				});
-        	}else{
-        		$currentElement.sortable({
-					opacity: 0.7,
-					update: function() {
-					fnSubmit(submit[0].checked);
-					}
-				});
-        	}
-        	$currentElement.disableSelection();
-    	});
-		});	*/
-
-
-	/*	list.nestedSortable({
-			listType: 'ul',
-			handle: 'div',
-			items: 'li',
-			toleranceElement: '> div'
-		});*/
-
-
-	/* ajax form submission */
-	jQuery('#dd-form').bind('submit',function(e) {
-		if(e) e.preventDefault();
-		fnSubmit(true);
-	});
+$( ".droppable" ).droppable({
+    accept: '.draggable',
+    drop: function(event, ui){
+        var id = ui.draggable.attr("id");
+        alert(id);
+    }
+    });
 });
+
 
   /*Fin drag and drop*/
 

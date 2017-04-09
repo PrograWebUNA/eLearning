@@ -19,6 +19,8 @@
 
     <link href="{{ url('css/font-awesome.css')}}" rel="stylesheet">
 
+    <link href="{{ url('css/style.css')}}" rel="stylesheet">
+
 
 
 
@@ -49,6 +51,7 @@
 
     <!-- jQuery -->
     <script src="{{ url('js/jquery.js') }}"></script>
+
     <script src="{{ url('js/jquery.mjs.nestedSortable.js') }}"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ url('js/bootstrap.min.js') }}"></script>

@@ -1,0 +1,15 @@
+#sortable-list				{ padding:0; cursor: move;}
+#sortable-list1				{ padding:0;     background: #78BA91; cursor: move; text-indent: 50px;}
+li.sortme 		 			{ padding:4px 8px; color:#000; cursor:move; list-style:none; width:500px; background:#ddd; margin:10px 0; border:1px solid #999; }
+#message-box				{ background:#fffea1; border:2px solid #fc0; padding:4px 8px; margin:0 0 14px 0; width:500px; }
+#curso                 {border:2px solid #000; height 500px; width:80%;}
+
+div.seccion{
+    background: #78BA91;
+    cursor: move;
+    height: 20%;
+    left: 10px;
+    position: relative;
+    top: 10px;
+    width: 70%;
+  }

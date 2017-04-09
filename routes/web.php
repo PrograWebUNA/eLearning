@@ -94,6 +94,12 @@ Route::get('/enroll/create', function () {
 Route::post('/enroll/store', 'matriculaController@store');
 
 Route::post('/enroll/editMatricula/enroll/updateMatricula', 'matriculaController@update');
+/*-----------------------Routes DD--------------------------*/
+
+Route::get('/enroll/dd', function () {
+         return view('content/enroll/dd');
+});
+
 /*FIN AMONTERO*/
 
 Auth::routes();
