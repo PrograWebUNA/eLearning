@@ -7,25 +7,33 @@
     <div class="col-md-8">
 
         <h1 class="page-header">
-            Page Heading
-            <small>Secondary Text</small>
+            Elearning Platform
+            <small>by AAJ</small>
         </h1>
 
-        <!-- First Blog Post -->
         <h2>
-            <a href="#">Blog Post Title</a>
+            Catalogo de Cursos
         </h2>
-        <p class="lead">
-            by <a href="index.php">Start Bootstrap</a>
-        </p>
-        <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:00 PM</p>
-        <hr>
-        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-        <hr>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.</p>
-        <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
-        <hr>
+
+        @foreach ($courses as $course)
+            <!-- First Blog Post -->
+            <h2>
+                <a href="#">{{$course->NOMBRE}}</a>
+            </h2>
+            <p class="lead">
+                by <a href="index.php">Elearning</a>
+            </p>
+            <p><span class="glyphicon glyphicon-time"></span> Posteado en {{$course->FECHA_INICIO}}</p>
+            <p><span class="glyphicon glyphicon-time"></span> Fecha de finalizaci&oacute;n en {{$course->FECHA_FIN}}</p>
+            <hr>
+            <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+            <hr>
+            <p>Tal vez podemos añadir a la tabla de curso una descripcion del curso y la ponemos aqui :)</p>
+            <a class="btn btn-primary" href="#">Ver M&aacute;s <span class="glyphicon glyphicon-chevron-right"></span></a>
+
+            <hr>
+        @endforeach
 
         <!-- Second Blog Post -->
         <h2>

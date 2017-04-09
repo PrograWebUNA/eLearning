@@ -10,11 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Route::get('/', function () {
+  //     return view('content/index');
+//});
 
-
-Route::get('/', function () {
-       return view('content/index');
-});
+Route::get('/', 'coursesController@showCoursesIndex');
 
 Route::get('/account/login', function () {
        return view('auth/login');
@@ -107,6 +107,12 @@ Route::get('/enroll/create', function () {
 Route::post('/enroll/store', 'matriculaController@store');
 
 Route::post('/enroll/editMatricula/enroll/updateMatricula', 'matriculaController@update');
+/*-----------------------Routes DD--------------------------*/
+
+Route::get('/enroll/dd', function () {
+         return view('content/enroll/dd');
+});
+
 /*FIN AMONTERO*/
 
 Auth::routes();

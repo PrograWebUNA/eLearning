@@ -89,6 +89,29 @@ function numberOfWeeks(){
   }
 
 
+  
+/*Otra forma*/
+
+$(document).ready(function(){
+    $( ".draggable" ).draggable({
+    start: function( event, ui ) {
+        var id = $(this).closest(".draggable").attr('id');
+    }
+});
+
+$( ".droppable" ).droppable({
+    accept: '.draggable',
+    drop: function(event, ui){
+        var id = ui.draggable.attr("id");
+        alert(id);
+    }
+    });
+});
+
+
+  /*Fin drag and drop*/
+
+
   /*Fin AMONTERO*/
 
 

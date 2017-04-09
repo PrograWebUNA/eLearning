@@ -60,4 +60,11 @@ public function edit($id)
 
     }
 
+    /*Metodos dd*/
+
+    public function showdd(){
+
+     return view('content.enroll.dd');
+    }
+
 }
