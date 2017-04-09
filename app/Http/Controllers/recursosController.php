@@ -18,8 +18,12 @@ class recursosController extends Controller
       return view('content.resource.create', compact('tipos','recursos'));
     }
     function store(Request $request){
-
-      return response()->json("juan");
+    /*  $recurso= new Recurso;
+      $recurso->ID_USUARIO = $request->ID_USUARIO;
+      $recurso->ROL = $request->ROL;
+      $recurso->ESTADO = 1;
+      $recurso->save();*/
+      return response()->json("Recurso creado exitosamente");
     }
     function update(){
 
