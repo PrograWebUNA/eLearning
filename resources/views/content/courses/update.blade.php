@@ -35,18 +35,23 @@
               </div>
 
               <div class="form-group">
+                <label for="urlCurso">URL de Imagen:</label>
+                <input type="text" class="form-control" id="urlCurso" name="urlCurso">
+              </div>
+
+              <div class="form-group">
                 <label for="fechaIni">Inicio del Curso:</label>
-                <input type="date" class="form-control" id="FECHA_INICIO" onblur="numberOfWeeks();" value="{{$course->FECHA_INICIO}}" name="FECHA_INICIO">
+                <input type="date" class="form-control" id="fecha_inicio" onblur="numberOfWeeks();" value="{{$course->FECHA_INICIO}}" name="fecha_inicio">
               </div>
 
               <div class="form-group">
                 <label for="fechaFin">Fecha final del Curso:</label>
-                <input type="date" class="form-control" id="FECHA_FIN" name="FECHA_FIN" value="{{$course->FECHA_FIN}}" onblur="numberOfWeeks();">
+                <input type="date" class="form-control" id="fecha_final" name="fecha_final" value="{{$course->FECHA_FIN}}" onblur="numberOfWeeks();">
               </div>
 
               <div class="form-group">
                 <label for="fechaFin">Numero de Semanas:</label>
-                <input type="text" class="form-control" id="DURACION"  name="DURACION" value="{{$course->DURACION}}" readonly >
+                <input type="text" class="form-control" id="duracion"  name="duracion" value="{{$course->DURACION}}" readonly >
 
                 <input type="hidden" class="form-control" id="ESTADO" name="ESTADO" value="{{$course->ESTADO}}" readonly >
               </div>

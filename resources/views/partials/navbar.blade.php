@@ -43,6 +43,7 @@
             									<li><a href="/courses/create">Crear Curso</a></li>
                               <li><a href="/role/show">Asignar rol</a></li>
                               <li><a href="/showUsers">Ver Usuarios</a></li>
+                              <li><a href="/showCourses">Ver Cursos</a></li>
             								</ul>
             		</li>
                 @else
