@@ -10,14 +10,14 @@ class recursosController extends Controller
 {
     //
     public function showAll(){
-    $recursos =   DB::table('RECURSO')
+    $recursos =   DB::table('RECURSO AS R1')
         ->join('TIPO_RECURSO', function ($join) {
-            $join->on('TIPO_RECURSO.ID_TIPO_RECURSO', '=', 'RECURSO.TIPO_RECURSO');
+            $join->on('TIPO_RECURSO.ID_TIPO_RECURSO', '=', 'R1.TIPO_RECURSO');
         })->join('RECURSO AS R2', function ($join2) {
-            $join2->on('R2.ID_RECURSO', '=', DB::raw('ifnull(RECURSO.RECURSO_PADRE,3)'));
+            $join2->on('R2.ID_RECURSO', '=', DB::raw('ifnull(R1.RECURSO_PADRE,R2.ID_RECURSO)'));
         })
 
-        ->select('TIPO_RECURSO.NOMBRE AS TIPO', DB::raw('ifnull(R2.NOMBRE,"NA") AS PADRE') , 'RECURSO.*')
+        ->select('TIPO_RECURSO.NOMBRE AS TIPO', DB::raw('ifnull(R2.NOMBRE,"NA") AS PADRE') , 'R2.ID_RECURSO AS ID', 'R2.*')
         ->get();
 
 
@@ -35,7 +35,7 @@ class recursosController extends Controller
     }
     function store(Request $request){
       $recurso= new Recurso;
-      $recurso->TIPO_RECURSO = $request->TIPO_RECURSO;
+      $recurso->TIPO_RECURSO = $request->tipo;
       $recurso->RECURSO_PADRE = $request->RECURSO_PADRE;
       $recurso->SEMANA = 1;
       $recurso->NOMBRE = $request->nombre;
@@ -48,17 +48,30 @@ class recursosController extends Controller
       $recurso->save();
       return response()->json("Recurso creado exitosamente");
     }
-    function update(){
-
+    function update(Request $request){
+      $recurso=  Recurso::find($request->ID_RECURSO);
+      $recurso->TIPO_RECURSO = $request->tipo;
+      $recurso->RECURSO_PADRE = $request->RECURSO_PADRE;
+      $recurso->SEMANA = 1;
+      $recurso->NOMBRE = $request->nombre;
+      $recurso->URL = $request->url;
+      $recurso->VISIBLE = $request->VISIBLE;
+      $recurso->SECUENCIA = $request->secuencia;
+      $recurso->NOTAS = $request->notas;
+      $recurso->ESTADO = 1;
+      $recurso->ID_USUARIO = $request->id_usuario;
+      $recurso->save();
+      return response()->json("Recurso actualizado correctamente!");
     }
-    function getForUpdate($id){
-
+    function getForUpdate($id,$idUsuario){
+      $tipos = Tipo_Recurso::orderBy('ID_TIPO_RECURSO')->get();
+      $recursos = Recurso::orderBy('ID_RECURSO')->where('ID_USUARIO',$idUsuario)->get();
+      $recurso = Recurso::find($id);
+      return view('content.resource.update', compact('recurso','tipos','recursos'));
     }
     public function delete($id){
       $recurso = Recurso::find($id);
       $recurso->delete();
-      /*return view('content.index');*/
-      /*return redirect()->route('/showUsers');*/
      return response()->json("El recurso se elimino correctamente!");
     }
 }

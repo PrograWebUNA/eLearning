@@ -21,6 +21,7 @@ class roleController extends Controller
         $usuarioRol->ROL = $request->ROL;
         $usuarioRol->ESTADO = 1;
         $usuarioRol->save();
+        return response()->json("Se asigno el rol correctamente!");
     }
 
     public static function  hasRole($ID_USUARIO, $RoleName)

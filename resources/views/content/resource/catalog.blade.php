@@ -19,7 +19,7 @@
                                     <th>URL</th>
                                     <th>Secuencia</th>
                                     <th>Notas</th>
-                                    @if(roleController::hasRole(Auth::user()->ID_USUARIO,"ADMINISTRADOR"))
+                                    @if(!roleController::hasRole(Auth::user()->ID_USUARIO,"ESTUDIANTE"))
                                     <th>Modificar</th>
                                     <th>Eliminar</th>
                                     @endif
@@ -34,9 +34,9 @@
                                     <td >{{$recurso->URL}}</td>
                                     <td >{{$recurso->SECUENCIA}}</td>
                                     <td >{{$recurso->NOTAS}}</td>
-                                    @if(roleController::hasRole(Auth::user()->ID_USUARIO,"ADMINISTRADOR"))
-                                    <td><button  onclick="updateResource({{ $recurso->ID_RECURSO }})" class="fa fa-pencil" aria-hidden="true" id="modificar" title=""></button></td>
-                                    <td><button  onclick="deleteResource({{ $recurso->ID_RECURSO }})" class="fa fa-trash-o" aria-hidden="true" id="eliminar"></button></td>
+                                    @if(!roleController::hasRole(Auth::user()->ID_USUARIO,"ESTUDIANTE"))
+                                    <td><button  onclick="updateResource({{ $recurso->ID }},{{ Auth::user()->ID_USUARIO }})" class="fa fa-pencil" aria-hidden="true" id="modificar" title=""></button></td>
+                                    <td><button  onclick="deleteResource({{ $recurso->ID }})" class="fa fa-trash-o" aria-hidden="true" id="eliminar"></button></td>
                                     @endif
                                   </tr>
                                 @endforeach

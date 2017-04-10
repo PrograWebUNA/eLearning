@@ -1,67 +1,62 @@
-  @extends('layouts.master')
+@extends('layouts.master')
 
-  @section('content')
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <div class="panel panel-default">
-          <div class="panel-heading">Modificar Curso</div>
-          <div class="panel-body">
-            <form class="form-horizontal" role="form"  action="courses/updateCourse" method="post">
-              {{ csrf_field() }}
+@section('content')
+<div class="row">
 
-              <div class="form-group{{ $errors->has('ID_CURSO') ? ' has-error' : '' }}">
-                <input type='hidden' id="ID_CURSO" type="text" class="form-control" name="ID_CURSO" value="{{$course->ID_CURSO}}" required>
+  <!-- Blog Entries Column -->
 
-                @if ($errors->has('ID_CURSO'))
-                <span class="help-block">
-                  <strong>{{ $errors->first('ID_CURSO') }}</strong>
-                </span>
-                @endif
-              </div>
-
-              <div class="form-group{{ $errors->has('NOMBRE') ? ' has-error' : '' }}">
-                <label for="NOMBRE" class="col-md-4 control-label">Nombre del Curso:</label>
-
-                <div class="col-md-6">
-                  <input  type="text" class="form-control" id="NOMBRE" name="NOMBRE" value="{{$course->NOMBRE}}" required autofocus>
-
-                  @if ($errors->has('NOMBRE'))
-                  <span class="help-block">
-                    <strong>{{ $errors->first('NOMBRE') }}</strong>
-                  </span>
-                  @endif
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="fechaIni">Inicio del Curso:</label>
-                <input type="date" class="form-control" id="FECHA_INICIO" onblur="numberOfWeeks();" value="{{$course->FECHA_INICIO}}" name="FECHA_INICIO">
-              </div>
-
-              <div class="form-group">
-                <label for="fechaFin">Fecha final del Curso:</label>
-                <input type="date" class="form-control" id="FECHA_FIN" name="FECHA_FIN" value="{{$course->FECHA_FIN}}" onblur="numberOfWeeks();">
-              </div>
-
-              <div class="form-group">
-                <label for="fechaFin">Numero de Semanas:</label>
-                <input type="text" class="form-control" id="DURACION"  name="DURACION" value="{{$course->DURACION}}" readonly >
-
-                <input type="hidden" class="form-control" id="ESTADO" name="ESTADO" value="{{$course->ESTADO}}" readonly >
-              </div>
-
-              <div class="form-group">
-                <div class="col-md-6 col-md-offset-4">
-                  <button type="submit" class="btn btn-primary">
-                    Modificar
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+    <form id="updateResource" action="#" method="post">
+      <div class="col-md-8" id="reg-form">
+    {{ csrf_field() }}
+    <div class="form-group">
+        <label for="tipo" class="col-md-4 control-label">Tipo</label>
+              <select class="form-control" name="tipo" id="tipo" data-parsley-required="true">
+              @foreach ($tipos as $tipo)
+              {
+                <option value="{{ $tipo->ID_TIPO_RECURSO }}">{{ $tipo->NOMBRE}}</option>
+              }
+              @endforeach
+            </select>
     </div>
-  </div>
-  @endsection
+    <div class="form-group">
+          <label for="padre" class="col-md-4 control-label">Recurso padre</label>
+                <select class="form-control" name="RECURSO_PADRE" id="RECURSO_PADRE" data-parsley-required="true">
+                @foreach ($recursos as $recurso)
+                {
+                  <option value="{{ $recurso->ID_RECURSO }}">{{ $recurso->NOMBRE}}</option>
+                }
+                @endforeach
+              </select>
+
+    </div>
+    <div class="form-group">
+      <label for="nombreCurso">Nombre:</label>
+      <input type="text" class="form-control" id="nombre" value="{{$recurso->NOMBRE}}" name="nombre">
+    </div>
+    <div class="form-group">
+      <label for="url">URL:</label>
+      <input type="text" class="form-control" id="url"  value="{{$recurso->URL}}" name="url">
+      <input type="hidden" class="form-control" id="ID_RECURSO"  value="{{$recurso->ID_RECURSO}}" name="ID_RECURSO">
+    </div>
+    <div class="form-group">
+      <label for="fechaFin">Visible:</label>
+      <input type="text" class="form-control" id="VISIBLE" value="{{$recurso->VISIBLE}}" name="VISIBLE" onblur="">
+    </div>
+    <div class="form-group">
+      <label for="fechaFin">Secuencia:</label>
+      <input type="text" class="form-control" id="secuencia" value="{{$recurso->SECUENCIA}}"  name="secuencia">
+    </div>
+    <div class="form-group">
+      <label for="fechaFin">Notas:</label>
+      <input type="text" class="form-control" id="notas"  name="notas" value="{{$recurso->NOTAS}}">
+      <input type="hidden" class="form-control" id="id_usuario" value="  {{ Auth::user()->ID_USUARIO  }}"readonly name="id_usuario">
+    </div>
+    <button type="submit" class="btn btn-default">Guardar</button>
+</div>
+</form>
+
+</div>
+<!-- /.row -->
+
+<hr>
+@endsection

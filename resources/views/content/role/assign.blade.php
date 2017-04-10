@@ -6,8 +6,9 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Asignar Rol</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" action="/role/store" method="post">
+
+                    <form class="form-horizontal" id="saveRol" role="form" action="#" method="post">
+                        <div class="panel-body" id="saveRolForm">
                         {{ csrf_field() }}
 
                         <div>
@@ -47,8 +48,9 @@
 
                             </div>
                         </div>
+                        </div>
                     </form>
-                </div>
+
             </div>
         </div>
     </div>

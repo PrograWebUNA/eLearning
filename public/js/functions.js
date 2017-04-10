@@ -172,7 +172,7 @@ function refrescarPagina(){
   }
 
 
-  function updateResource(id) {
+  function updateResource(id,idUsuario) {
 
       var n = noty({
                   text        : '¿Realmente desea actualizar el Recurso?',
@@ -184,7 +184,7 @@ function refrescarPagina(){
                       {addClass: 'btn btn-primary', text: 'Si', onClick: function ($noty) {
                           $noty.close();
                           noty({dismissQueue: true, force: true, layout: 'center', theme: 'defaultTheme', text: ':) !', type: 'success'});
-                          var txt = "/resource/update/"+id;
+                          var txt = "/resource/update/"+id+"/"+idUsuario;
                           setTimeout(refrescarPagina,3000);
                           window.location.replace(txt);
                       }
@@ -423,6 +423,53 @@ function refrescarPagina(){
                           return false;
                       });
 
+                      $( "#saveRol" ).submit(function( e ) {
 
+                         var data = $("#saveRol").serialize();
+                         e.preventDefault();
+                            $.ajax({
+                                    type: 'POST',
+                                    url: '/role/store',
+                                    data: data,
+                                    success: function(data) {
+                                    //window.location.href = "/";
+                                    $.noty.consumeAlert({layout: 'center', type: 'success', dismissQueue: true});
+                                    alert(data);
+                                    console.log(data);
+                                    setTimeout(refrescarPagina,3000);
+
+                                },
+                                error: function(data) {
+                                  $.noty.consumeAlert({layout: 'center', type: 'error', dismissQueue: true});
+                                  alert("Error al asignar rol");
+                                    setTimeout(refrescarPagina,3000);
+                                }
+                            });
+                            return false;
+                        });
+                        $( "#updateResource" ).submit(function( e ) {
+
+                           var data = $("#updateResource").serialize();
+                           e.preventDefault();
+                              $.ajax({
+                                      type: 'POST',
+                                      url: '/resource/update',
+                                      data: data,
+                                      success: function(data) {
+                                      //window.location.href = "/";
+                                      $.noty.consumeAlert({layout: 'center', type: 'success', dismissQueue: true});
+                                      alert(data);
+                                      console.log(data);
+                                      setTimeout(refrescarPagina,3000);
+
+                                  },
+                                  error: function(data) {
+                                    $.noty.consumeAlert({layout: 'center', type: 'error', dismissQueue: true});
+                                    alert("Error al asignar rol");
+                                      setTimeout(refrescarPagina,3000);
+                                  }
+                              });
+                              return false;
+                          });
 
   });

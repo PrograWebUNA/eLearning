@@ -45,7 +45,7 @@ Route::post('/resource/store','recursosController@store');
 
 Route::post('/resource/update','recursosController@update');
 
-Route::get('/resource/update/{id}', 'recursosController@getForUpdate');
+Route::get('/resource/update/{id}/{idUsuario}', 'recursosController@getForUpdate');
 
 Route::get('/resource/delete/{id}', 'recursosController@delete');
 

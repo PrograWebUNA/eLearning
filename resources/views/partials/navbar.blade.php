@@ -35,26 +35,29 @@
                     <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Mis Cursos</a>
                       <ul class="dropdown-menu">
                           <li><a href="">Prueba</a></li>
-                              
+
                       </ul>
                    </li>
-
+                   <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuraciones</a>
+                             <ul class="dropdown-menu">
                 @if(roleController::hasRole(Auth::user()->ID_USUARIO,"ADMINISTRADOR"))
-                  <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuraciones</a>
-            								<ul class="dropdown-menu">
+
             									<li><a href="/courses/create">Crear Curso</a></li>
+                              <li><a href="/enroll/show">Matricular</a></li>
                               <li><a href="/account/register">Registrar usuario</a></li>
                               <li><a href="/resource/show/{{ Auth::user()->ID_USUARIO  }}">Crear Recursos</a></li>
                               <li><a href="/role/show">Asignar rol</a></li>
                               <li><a href="/showUsers">Ver Usuarios</a></li>
+                              <li><a href="/enroll/showMatriculas">Ver Matriculas</a></li>
                               <li><a href="/showCourses">Ver Cursos</a></li>
                               <li><a href="/resource/list">Ver Recursos</a></li>
-            								</ul>
+
             		</li>
                 @else
-                <h1>AQUI VA LO QUE SE TIENE QUE MOSTRAR SI NO TIENE EL ROL</h1>
+                            <li><a href="/showCourses">Ver Cursos</a></li>
+                            <li><a href="/resource/list">Ver Recursos</a></li>
                 @endif
-
+                </ul>
 
                 </li>
                         <li>
