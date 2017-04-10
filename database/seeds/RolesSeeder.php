@@ -13,18 +13,22 @@ class RolesSeeder extends Seeder
     {
        DB::table('ROL')->delete();
        DB::table('ROL')->insert([
+         'ID_ROL' => 1,
         'NOMBRE' => 'ADMINISTRADOR',
         'ESTADO'    => 1
        ]);
        DB::table('ROL')->insert([
+         'ID_ROL' => 2,
         'NOMBRE' => 'EDITOR',
         'ESTADO'    => 1
        ]);
        DB::table('ROL')->insert([
+         'ID_ROL' => 3,
         'NOMBRE' => 'MODERADOR',
         'ESTADO'    => 1
        ]);
        DB::table('ROL')->insert([
+         'ID_ROL' => 4,
         'NOMBRE' => 'ESTUDIANTE',
         'ESTADO'    => 1
        ]);
