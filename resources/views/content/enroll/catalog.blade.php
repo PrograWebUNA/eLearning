@@ -26,7 +26,7 @@
                                 @foreach ($matriculas as $matricula)
                                   <tr>
                                     <td value="{{ $matricula->ID_MATRICULA }}">{{$matricula->ID_MATRICULA}}</td>
-                                    <td value="{{ $matricula->ID_MATRICULA }}">{{$matricula->ID_CURSO}}</td>
+                                    <td value="{{ $matricula->ID_MATRICULA }}">{{$matricula->NOMBRE_CURSO}}</td>
                                     <td value="{{ $matricula->ID_MATRICULA }}">{{$matricula->NOMBRE}}</td>
                                     <td value="{{ $matricula->ID_MATRICULA }}">{{$matricula->FECHA_MATRICULA}}</td>
                                     <td value="{{ $matricula->ID_MATRICULA }}">{{$matricula->ANIO}}</td>

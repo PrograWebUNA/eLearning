@@ -25,16 +25,6 @@ class matriculaController extends Controller
     //  $matriculas = Matricula::orderBy('ID_MATRICULA')->get();
     //  $course = DB::table('curso')->get();
      return view('content.enroll.catalog', compact('matriculas'));
-
-     $recursos =   DB::table('RECURSO')
-             ->join('TIPO_RECURSO', function ($join) {
-                 $join->on('TIPO_RECURSO.ID_TIPO_RECURSO', '=', 'RECURSO.TIPO_RECURSO');
-             })->join('RECURSO AS R2', function ($join2) {
-                 $join2->on('R2.ID_RECURSO', '=', DB::raw('ifnull(RECURSO.RECURSO_PADRE,3)'));
-             })
-
-             ->select('TIPO_RECURSO.NOMBRE AS TIPO', DB::raw('ifnull(R2.NOMBRE,"NA") AS PADRE') , 'RECURSO.NOMBRE')
-             ->get();
     }
 
 
