@@ -34,13 +34,8 @@
 
                     <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Mis Cursos</a>
                       <ul class="dropdown-menu">
-                              @foreach ($misCursos as $miCurso)
-                                  @if($miCurso->USER_ID == Auth::user()->ID_USUARIO)
-
-                                      <li><a href="">{{$miCurso->NOMBRE_CURSO}}</a></li>
-                                  @endif
-
-                              @endforeach
+                          <li><a href="">Prueba</a></li>
+                              
                       </ul>
                    </li>
 
