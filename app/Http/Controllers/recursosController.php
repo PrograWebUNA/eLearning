@@ -54,7 +54,11 @@ class recursosController extends Controller
     function getForUpdate($id){
 
     }
-    function delete($id){
-
+    public function delete($id){
+      $recurso = Recurso::find($id);
+      $recurso->delete();
+      /*return view('content.index');*/
+      /*return redirect()->route('/showUsers');*/
+     return response()->json("El recurso se elimino correctamente!");
     }
 }

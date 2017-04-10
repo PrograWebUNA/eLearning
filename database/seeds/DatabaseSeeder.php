@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
       Eloquent::unguard();
       $this->call('RolesSeeder');
       $this->call('tipoRecursoSeeder');
+      $this->call('cursoSeeder');
 
     }
 }

@@ -8,7 +8,7 @@
                           <div class="panel-heading">Lista de Cursos</div>
                           <div class="panel-body">
 
-                            <h2>Cursos Activos</h2>
+                            <h2>Recursos Activos</h2>
 
                               <table class="table table-striped">
                                 <thead>
