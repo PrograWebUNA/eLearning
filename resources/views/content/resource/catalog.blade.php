@@ -13,25 +13,27 @@
                               <table class="table table-striped">
                                 <thead>
                                   <tr>
+                                    <th>Tipo</th>
+                                    <th>Recurso padre</th>
                                     <th>Nombre</th>
-                                    <th>Duraci&oacute;n</th>
-                                    <th>Fecha de Inicio</th>
-                                    <th>Fecha Final</th>
-                                    <th>Semanas</th>
+                                    <th>URL</th>
+                                    <th>Secuencia</th>
+                                    <th>Notas</th>
                                     <th>Modificar</th>
                                     <th>Eliminar</th>
                                  </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($courses as $course)
+                                @foreach ($recursos as $recurso)
                                   <tr>
-                                    <td value="{{ $course->ID_CURSO }}">{{$course->NOMBRE}}</td>
-                                    <td value="{{ $course->ID_CURSO }}">{{$course->DURACION}}</td>
-                                    <td value="{{ $course->ID_CURSO }}">{{$course->FECHA_INICIO}}</td>
-                                    <td value="{{ $course->ID_CURSO }}">{{$course->FECHA_FIN}}</td>
-                                    <td value="{{ $course->ID_CURSO }}">{{$course->ESTADO}}</td>
-                                    <td><button  onclick="updateCourse({{ $course->ID_CURSO }})" class="fa fa-pencil" aria-hidden="true" id="modificar" title=""></button></td>
-                                    <td><button  onclick="deleteCourse({{ $course->ID_CURSO }})" class="fa fa-trash-o" aria-hidden="true" id="eliminar"></button></td>
+                                    <td >{{$recurso->TIPO}}</td>
+                                    <td >{{$recurso->PADRE}}</td>
+                                    <td >{{$recurso->NOMBRE}}</td>
+                                    <td >{{$recurso->URL}}</td>
+                                    <td >{{$recurso->SECUENCIA}}</td>
+                                    <td >{{$recurso->NOTAS}}</td>
+                                    <td><button  onclick="updateResource({{ $recurso->ID_RECURSO }})" class="fa fa-pencil" aria-hidden="true" id="modificar" title=""></button></td>
+                                    <td><button  onclick="deleteResource({{ $recurso->ID_RECURSO }})" class="fa fa-trash-o" aria-hidden="true" id="eliminar"></button></td>
                                   </tr>
                                 @endforeach
 

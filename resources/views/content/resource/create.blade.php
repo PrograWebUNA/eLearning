@@ -10,14 +10,13 @@
     {{ csrf_field() }}
     <div class="form-group">
         <label for="tipo" class="col-md-4 control-label">Tipo</label>
-              <select class="form-control" name="TIPO_RECURSO" id="TIPO_RECURSO" data-parsley-required="true">
+              <select class="form-control" name="tipo" id="tipo" data-parsley-required="true">
               @foreach ($tipos as $tipo)
               {
-                <option value="{{ $tipo->ID_TIPO }}">{{ $tipo->NOMBRE}}</option>
+                <option value="{{ $tipo->ID_TIPO_RECURSO }}">{{ $tipo->NOMBRE}}</option>
               }
               @endforeach
             </select>
-
     </div>
     <div class="form-group">
           <label for="padre" class="col-md-4 control-label">Recurso padre</label>
@@ -36,7 +35,7 @@
     </div>
     <div class="form-group">
       <label for="url">URL:</label>
-      <input type="text" class="form-control" id="url" onblur="numberOfWeeks();" name="url">
+      <input type="text" class="form-control" id="url"  name="url">
     </div>
     <div class="form-group">
       <label for="fechaFin">Visible:</label>
@@ -49,6 +48,7 @@
     <div class="form-group">
       <label for="fechaFin">Notas:</label>
       <input type="text" class="form-control" id="notas"  name="notas">
+      <input type="hidden" class="form-control" id="id_usuario" value="  {{ Auth::user()->ID_USUARIO  }}"readonly name="id_usuario">
     </div>
     <button type="submit" class="btn btn-default">Guardar</button>
 </div>
