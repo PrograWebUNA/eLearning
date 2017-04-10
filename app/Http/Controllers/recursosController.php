@@ -9,7 +9,7 @@ use App\Http\Controllers\Auth;
 class recursosController extends Controller
 {
     //
-    public function showAll($id_usuario){
+    public function showAll(){
     $recursos =   DB::table('RECURSO')
         ->join('TIPO_RECURSO', function ($join) {
             $join->on('TIPO_RECURSO.ID_TIPO_RECURSO', '=', 'RECURSO.TIPO_RECURSO');

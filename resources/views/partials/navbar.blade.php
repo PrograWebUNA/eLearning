@@ -21,9 +21,7 @@
                     <a href="/courses/catalog">Cursos</a>
                 </li>
 
-                <li>
-                    <a href="/account/register">Registrar</a>
-                </li>
+
                 <li>
                     <a href="/account/login">Ingresar</a>
                 </li>
@@ -41,9 +39,12 @@
                   <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuraciones</a>
             								<ul class="dropdown-menu">
             									<li><a href="/courses/create">Crear Curso</a></li>
+                              <li><a href="/account/register">Registrar usuario</a></li>
+                              <li><a href="/resource/show/{{ Auth::user()->ID_USUARIO  }}">Crear Recursos</a></li>
                               <li><a href="/role/show">Asignar rol</a></li>
                               <li><a href="/showUsers">Ver Usuarios</a></li>
                               <li><a href="/showCourses">Ver Cursos</a></li>
+                              <li><a href="/resource/list">Ver Recursos</a></li>
             								</ul>
             		</li>
                 @else

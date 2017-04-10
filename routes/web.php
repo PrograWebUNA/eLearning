@@ -37,7 +37,7 @@ Route::get('/role/show', 'roleController@show');
 Route::post('/role/store', 'roleController@store');
 
 /*---------------------------------Resources  Routes-------------------------------------*/
-Route::get('resource/list/{id_usuario}', 'recursosController@showAll');
+Route::get('resource/list', 'recursosController@showAll');
 
 Route::get('resource/show/{id_usuario}', 'recursosController@show');
 
