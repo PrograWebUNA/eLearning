@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Courses;
+use DB;
 
 class coursesController extends Controller
 {
@@ -33,7 +34,15 @@ public function store(Request $request)
 
 public function showCoursesIndex(){
   $courses = Courses::orderBy('ID_CURSO')->get();
-  return view('content.index', compact('courses'));
+
+  $misCursos = DB::table('MATRICULA')
+  ->join('CURSO', function ($join){
+      $join->on('MATRICULA.CURSO','=','CURSO.ID_CURSO');
+  })->join('users',function($join2){
+      $join2->on('MATRICULA.ID_USUARIO','=','users.ID_USUARIO');
+  })->select('CURSO.NOMBRE AS NOMBRE_CURSO','users.ID_USUARIO AS USER_ID','MATRICULA.*')->get();
+
+  return view('content.index', compact('courses','misCursos'));
 }
 
 

@@ -18,7 +18,7 @@
                     <a href="/">Inicio</a>
                 </li>
                 <li>
-                    <a href="/courses/catalog">Cursos</a>
+                    <a href="/showCourses">Cursos</a>
                 </li>
 
 
@@ -31,10 +31,19 @@
                         {{ Auth::user()->name  }}
                     </a>
                 </li>
-                <li class="dropdown">
-                  <a  role="button"  href="/account/login">Mis cursos<span class="caret"></span></a>
-                </li>
-                <li>
+
+                    <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Mis Cursos</a>
+                      <ul class="dropdown-menu">
+                              @foreach ($misCursos as $miCurso)
+                                  @if($miCurso->USER_ID == Auth::user()->ID_USUARIO)
+
+                                      <li><a href="">{{$miCurso->NOMBRE_CURSO}}</a></li>
+                                  @endif
+
+                              @endforeach
+                      </ul>
+                   </li>
+
                 @if(roleController::hasRole(Auth::user()->ID_USUARIO,"ADMINISTRADOR"))
                   <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuraciones</a>
             								<ul class="dropdown-menu">
