@@ -13,6 +13,7 @@ class cursoSeeder extends Seeder
     {
       DB::table('CURSO')->delete();
       DB::table('CURSO')->insert([
+        'ID_CURSO' => 1,  
        'NOMBRE' => 'Estructuras discretas',
        'DURACION'=>18,
        'FECHA_INICIO'=>'2017-02-01',
