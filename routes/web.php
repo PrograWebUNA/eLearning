@@ -100,11 +100,9 @@ Route::get('/enroll/deleteMatricula/{id}', 'matriculaController@delete');
 
 Route::get('/enroll/editMatricula/{id}', 'matriculaController@edit');
 
-Route::get('/enroll/create', function () {
-       return view('content/enroll/create');
-});
+Route::post('/storeMatricula', 'matriculaController@store');
 
-Route::post('/enroll/store', 'matriculaController@store');
+//Route::post('/enroll/store', 'matriculaController@store');
 
 Route::post('/enroll/editMatricula/enroll/updateMatricula', 'matriculaController@update');
 /*-----------------------Routes DD--------------------------*/

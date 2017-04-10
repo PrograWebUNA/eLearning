@@ -18,6 +18,8 @@
                                     <th>Nombre</th>
                                     <th>Fecha matricula</th>
                                     <th>A&ntilde;o</th>
+                                    <th>Modificar</th>
+                                    <th>Eliminar</th>
                                  </tr>
                                 </thead>
                                 <tbody>

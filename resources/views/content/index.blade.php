@@ -27,9 +27,9 @@
             <p><span class="glyphicon glyphicon-time"></span> Posteado en {{$course->FECHA_INICIO}}</p>
             <p><span class="glyphicon glyphicon-time"></span> Fecha de finalizaci&oacute;n en {{$course->FECHA_FIN}}</p>
             <hr>
-            <img class="img-responsive" src="http://www.innowine.es/wp-content/uploads/2016/08/900-x-300-head-1.jpg" alt="">
+            <img class="img-responsive" src="{{$course->URL_IMAGEN}}" alt="">
             <hr>
-            <p>Tal vez podemos añadir a la tabla de curso una descripcion del curso y la ponemos aqui :)</p>
+            <p>{{$course->DESCRIPCION}}</p>
             <a class="btn btn-primary" href="#">Ver M&aacute;s <span class="glyphicon glyphicon-chevron-right"></span></a>
 
             <hr>

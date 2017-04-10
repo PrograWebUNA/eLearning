@@ -5,12 +5,12 @@
 
   <!-- Blog Entries Column -->
   <div class="col-md-8">
-    <form action="/storeCourse" method="get">
+    <form action="#" method="get" id="saveCourseForm">
       {{ csrf_field() }}
 
     <div class="form-group">
       <label for="nombreCurso">Nombre:</label>
-      <input type="text" class="form-control" id="nombre" name="nombre">
+      <input type="text" class="form-control" id="nombre" name="nombre" required>
     </div>
 
     <div class="form-group">
@@ -19,13 +19,18 @@
     </div>
 
     <div class="form-group">
+      <label for="urlCurso">Descripci&oacute;n del Curso:</label>
+      <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+    </div>
+
+    <div class="form-group">
       <label for="fechaIni">Fecha de Inicio:</label>
-      <input type="date" class="form-control" id="fecha_inicio" onblur="numberOfWeeks();" name="fecha_inicio">
+      <input type="date" class="form-control" id="fecha_inicio" onblur="numberOfWeeks();" name="fecha_inicio" required>
     </div>
 
     <div class="form-group">
       <label for="fechaFin">Fecha de Fin:</label>
-      <input type="date" class="form-control" id="fecha_final" name="fecha_final" onblur="numberOfWeeks();">
+      <input type="date" class="form-control" id="fecha_final" name="fecha_final" onblur="numberOfWeeks();" required>
     </div>
 
     <div class="form-group">

@@ -21,10 +21,12 @@ public function store(Request $request)
     $course->duracion = $request->duracion;
     $course->URL_IMAGEN = $request->urlCurso;
     $course->fecha_inicio = $request->fecha_inicio;
-    $course->fecha_final = $request->fecha_final;
-    $course->estado =1;
+    $course->fecha_fin = $request->fecha_final;
+    $course->estado = 1;
+    $course->DESCRIPCION = $request->descripcion;
     /*enviar semana, primero añadir campo en la base de datos OJOOOOOOOO*/
     $course->save();
+    return response()->json("Se guardo el curso correctamente!");
 
 }
 
@@ -58,7 +60,9 @@ public function updateCourse(Request $request)
     $course->FECHA_INICIO = $request->fecha_inicio;
     $course->FECHA_FIN = $request->fecha_final;
     $course->ESTADO = $request->ESTADO;
+    $course->DESCRIPCION = $request->descripcion;
     $course->save();
+    return response()->json("Curso actualizado correctamente!");
 }
 
 
@@ -67,7 +71,7 @@ public function updateCourse(Request $request)
       $course->delete();
       /*return view('content.index');*/
       /*return redirect()->route('/showUsers');*/
-     dd("Se Elimino con exito el curso:  ".$course->NOMBRE);
+     return response()->json("El curso se elimino correctamente!");
     }
 
 

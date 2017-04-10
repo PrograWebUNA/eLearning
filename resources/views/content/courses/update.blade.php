@@ -7,7 +7,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">Modificar Curso</div>
           <div class="panel-body">
-            <form class="form-horizontal" role="form"  action="courses/updateCourse" method="post">
+            <form class="form-horizontal" role="form"  action="#" method="post" id="updateCourseForm">
               {{ csrf_field() }}
 
               <div class="form-group{{ $errors->has('ID_CURSO') ? ' has-error' : '' }}">
@@ -20,33 +20,29 @@
                 @endif
               </div>
 
-              <div class="form-group{{ $errors->has('NOMBRE') ? ' has-error' : '' }}">
-                <label for="NOMBRE" class="col-md-4 control-label">Nombre del Curso:</label>
-
-                <div class="col-md-6">
-                  <input  type="text" class="form-control" id="NOMBRE" name="NOMBRE" value="{{$course->NOMBRE}}" required autofocus>
-
-                  @if ($errors->has('NOMBRE'))
-                  <span class="help-block">
-                    <strong>{{ $errors->first('NOMBRE') }}</strong>
-                  </span>
-                  @endif
-                </div>
+              <div class="form-group">
+                <label for="NOMBRE">Nombre del Curso:</label>
+                <input  type="text" class="form-control" id="NOMBRE" name="NOMBRE" value="{{$course->NOMBRE}}" required autofocus>
               </div>
 
               <div class="form-group">
                 <label for="urlCurso">URL de Imagen:</label>
-                <input type="text" class="form-control" id="urlCurso" name="urlCurso">
+                <input type="text" class="form-control" id="urlCurso" name="urlCurso" value="{{$course->URL_IMAGEN}}">
+              </div>
+
+              <div class="form-group">
+                <label for="urlCurso">Descripci&oacute;n del Curso:</label>
+                <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{$course->DESCRIPCION}}" required>
               </div>
 
               <div class="form-group">
                 <label for="fechaIni">Inicio del Curso:</label>
-                <input type="date" class="form-control" id="fecha_inicio" onblur="numberOfWeeks();" value="{{$course->FECHA_INICIO}}" name="fecha_inicio">
+                <input type="date" class="form-control" id="fecha_inicio" onblur="numberOfWeeks();" value="{{$course->FECHA_INICIO}}" name="fecha_inicio" required>
               </div>
 
               <div class="form-group">
                 <label for="fechaFin">Fecha final del Curso:</label>
-                <input type="date" class="form-control" id="fecha_final" name="fecha_final" value="{{$course->FECHA_FIN}}" onblur="numberOfWeeks();">
+                <input type="date" class="form-control" id="fecha_final" name="fecha_final" value="{{$course->FECHA_FIN}}" onblur="numberOfWeeks();" required>
               </div>
 
               <div class="form-group">

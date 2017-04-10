@@ -7,7 +7,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">Modificar Matricula</div>
           <div class="panel-body">
-            <form class="form-horizontal" role="form"  action="enroll/updateMatricula" method="post">
+            <form class="form-horizontal" role="form"  action="#" method="post" id="updateMatriculaForm">
               {{ csrf_field() }}
 
 
