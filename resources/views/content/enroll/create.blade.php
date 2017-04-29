@@ -27,17 +27,17 @@
 
 
     <div class="form-group" >
+
       <label for="NOMBRE_USUARIO" class="col-md-4 control-label" >Usuario</label>
 
       <div class="col-md-6 ">
-        <input type="text" class="form-control" id="NOMBRE_USUARIO"
-        name="NOMBRE_USUARIO" value="{{ Auth::user()->name }}"
-        readonly="true">
-
-        <input type="hidden" class="control-label"
-        id="ID_USUARIO"
-        name="ID_USUARIO"
-        value="{{ Auth::user()->ID_USUARIO }}">
+            <select class="form-control" name="ID_USUARIO" id="ID_USUARIO" >
+              @foreach ($usuarios as $usuario)
+              {
+                <option value="{{ $usuario->ID_USUARIO }}">{{ $usuario->name}}</option>
+              }
+              @endforeach
+            </select>
       </div>
     </div>
 
