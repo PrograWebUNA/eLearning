@@ -111,6 +111,44 @@ Route::get('/enroll/dd', function () {
          return view('content/enroll/dd');
 });
 
+
+/*------------------------------Video-----------------------*/
+/*Pantalla de inicio*/
+Route::get('menu/', function () {
+    return view('content/webservice/menu');
+});
+
+/*Llama a la pagina para subir un video desde el equipo*/
+Route::get('uploadVideo/', function () {
+    return view('content/webservice/upload');
+});
+
+/*Llama a la pagina para descargar un video al equipo*/
+Route::get('downloadVideo/', function () {
+    return view('content/webservice/download');
+});
+
+/*Llama a la pagina para reproducir el video*/
+Route::get('showVideo/', function () {
+    return view('content/webservice/showVideo');
+});
+
+
+/*Llama al metodo que sube los videos del repositorio local al repositorio del WS*/
+Route::post('upload/', 'WSController@upload');
+
+/*Llama al metodo que descarga los videos del WS al navegador*/
+Route::post('download/', 'WSController@download');
+
+/*Llama al metodo que se encarga de reproducir los videos*/
+Route::post('play/', 'WSController@play');
+
+Route::get('get-video/{video}', 'WSController@getVideo')->name('getVideo');
+
+
+
+
+
 /*FIN AMONTERO*/
 
 Auth::routes();
