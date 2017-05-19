@@ -35,8 +35,8 @@
                                     <td >{{$recurso->SECUENCIA}}</td>
                                     <td >{{$recurso->NOTAS}}</td>
                                     @if(!roleController::hasRole(Auth::user()->ID_USUARIO,"ESTUDIANTE"))
-                                    <td><button  onclick="updateResource({{ $recurso->ID }},{{ Auth::user()->ID_USUARIO }})" class="fa fa-pencil" aria-hidden="true" id="modificar" title=""></button></td>
-                                    <td><button  onclick="deleteResource({{ $recurso->ID }})" class="fa fa-trash-o" aria-hidden="true" id="eliminar"></button></td>
+                                    <td><button  onclick="updateResource({{ $recurso->ID_RECURSO }},{{ Auth::user()->ID_USUARIO }})" class="fa fa-pencil" aria-hidden="true" id="modificar" title=""></button></td>
+                                    <td><button  onclick="deleteResource({{ $recurso->ID_RECURSO }})" class="fa fa-trash-o" aria-hidden="true" id="eliminar"></button></td>
                                     @endif
                                   </tr>
                                 @endforeach
