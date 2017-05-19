@@ -30,8 +30,8 @@
             <img class="img-responsive" src="{{$course->URL_IMAGEN}}" alt="">
             <hr>
             <p>{{$course->DESCRIPCION}}</p>
-            <a class="btn btn-primary" href="#">Ver M&aacute;s <span class="glyphicon glyphicon-chevron-right"></span></a>
-
+            <a class="btn btn-primary" onclick="showResources({{ $course->ID_CURSO }})">Ver M&aacute;s <span class="glyphicon glyphicon-chevron-right"></span></a>
+            
             <hr>
         @endforeach
 

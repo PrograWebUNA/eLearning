@@ -21,7 +21,7 @@
                                     @if(!roleController::hasRole(Auth::user()->ID_USUARIO,"ESTUDIANTE"))
                                     <th>Modificar</th>
                                     <th>Eliminar</th>
-                                    <th>Ver</th>
+                                    <th>Ver Recursos</th>
                                     @endif
                                  </tr>
                                 </thead>
