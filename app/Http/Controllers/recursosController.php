@@ -6,26 +6,16 @@ use Illuminate\Http\Request;
 use App\Recurso;
 use App\Tipo_Recurso;
 use App\Http\Controllers\Auth;
-
-
-
+use App\Courses;
 use Artisaninweb\SoapWrapper\SoapWrapper;
 use App\Soap\Request\GetConversionAmount;
 use App\Soap\Response\GetConversionAmountResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
-
 use App\Http\Controllers\VideoStream;
-
 use Response;
 use Input;
 use Session;
-
-
-
-
-
-
 class recursosController extends Controller
 {
     //
@@ -71,8 +61,59 @@ class recursosController extends Controller
       $recurso->ID_USUARIO = $request->id_usuario;
       $recurso->ID_CURSO = $request->id_curso;
 
+            /* Metodo de carga de archivo*/
+
+            ini_set('memory_limit', '-1');
+            // obteniendo la informacion del archivo
+            $file = Input::file('file');
+            echo ("<script> alert('".$request->file."') </script>");
+            $mime = $file->getMimeType();
+            /* se identifica el tipo de archivo. se requiere que el modulo extension=php_fileinfo.dll este descomentado en el
+            php.ini*/
+            if ($mime == "video/x-flv" || $mime == "video/mp4" || $mime == "application/x-mpegURL" || $mime == "video/MP2T" || $mime == "video/3gpp" || $mime == "video/quicktime" || $mime == "video/x-msvideo" || $mime == "video/x-ms-wmv") {
+            // send back to the page with the input data and errors
+            if (Input::file('file')->isValid()) {
+              //La ruta del repositorio es en C:\localRepository
+              $destinationPath = $localRepo = realpath('../../../../') . "\localRepository/" . "\\"; /* ruta del repositorio local para cargar el archivo y luego subirlo por el servicio*/
+              $extension = Input::file('file')->getClientOriginalExtension(); // obtiene la extension del archivo
+              $originalName = Input::file('file')->getClientOriginalName(); //obtiene el nombre original del archivo
+              $fileName = rand(11111,99999).'.'.$extension; // renombrar el archivo para subirlo al repositorio de forma temporal
+              Input::file('file')->move($destinationPath, $fileName); // subiendo el archivo al repositorio temporal
+              //Inicia conexion con el servicio web
+              $this->soapWrapper->add('video', function ($service) {
+              $service->wsdl("http://localhost:9999/MtomStreamingService?wsdl");
+              $service->trace(true);                                                   // Optional: (parameter: true/false)
+              $service->cache(WSDL_CACHE_NONE);                                        // Optional: Set the WSDL cache
+
+            });
+
+            //obtiene la ruta del repositorio local
+            $localRepo = realpath('../../../../') . "\localRepository/" . "\\";
+            //Indica el nombre del archivo original para enviarselo al WS
+            $Originalfilename = $originalName;
+
+            //Le dice cual es el nombre del archivo que tiene en el repositorio
+            $fileRoot = $localRepo . $fileName;
+            //obtiene el archivo y lo transforma a bytes
+            $contents = file_get_contents($fileRoot);
+
+            $curso ="java";
+            //Carga los parametros del WS
+            // cargar los parametos y que se llamen igual a los de java
+            $course = Courses::find($request->id_curso);
+             $cursos=$course->NOMBRE;
+            $data = [
+            'nombreArchivo' => $Originalfilename,
+            'data'   => $contents,
+            'curso'=> $cursos
+            ];
+
+            /*Llama al servicio indicando el nombre del servicio, como le pusimos en el add y el nombre del metodo del servicio web*/
+            $this->soapWrapper->call('video.subir', $data);
+
+
       $recurso->save();
-      return response()->json("Recurso creado exitosamente");
+      return view('content.resource.catalog');
     }
     function update(Request $request){
       $recurso=  Recurso::find($request->ID_RECURSO);
@@ -86,6 +127,26 @@ class recursosController extends Controller
       $recurso->NOTAS = $request->notas;
       $recurso->ESTADO = 1;
       $recurso->ID_USUARIO = $request->id_usuario;
+
+      }
+
+      // devolviendo el mensaje de que se subio correctamente
+      Session::flash('success', 'Upload successfully');
+      return Redirect::to('uploadVideo');
+      }
+      else {
+      // en caso de que el tipo de archivo sea invalido
+      return Redirect::back()->withErrors(['msg', 'Tipo de archivo invalido']);
+
+      }
+
+
+      /*Fin */
+
+
+
+
+
       $recurso->save();
       return response()->json("Recurso actualizado correctamente!");
     }
@@ -154,12 +215,15 @@ class recursosController extends Controller
       $contents = file_get_contents($fileRoot);
 
       $curso ="java";
+
+      $recursito =$request->tipo;
       //Carga los parametros del WS
       // cargar los parametos y que se llamen igual a los de java
       $data = [
       'nombreArchivo' => $Originalfilename,
       'data'   => $contents,
-      'curso'=> $curso
+      'curso'=> $curso,
+      'recurso'=> '1'
       ];
 
       /*Llama al servicio indicando el nombre del servicio, como le pusimos en el add y el nombre del metodo del servicio web*/
