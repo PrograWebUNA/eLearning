@@ -298,8 +298,60 @@ function refrescarPagina(){
 
   /*Fin AMONTERO*/
 
+  function showResources(idCurso) {
 
-  /*Storage data using ajax*/
+      var n = noty({
+                  text        : '¿Realmente desea ver los recursos del curso seleccionado?',
+                  type        : 'alert',
+                  dismissQueue: true,
+                  layout      : 'center',
+                  theme       : 'relax',
+                  buttons     : [
+                      {addClass: 'btn btn-primary', text: 'Si', onClick: function ($noty) {
+                          $noty.close();
+                          noty({dismissQueue: true, force: true, layout: 'center', theme: 'defaultTheme', text: ':) !', type: 'success'});
+                          var txt = "resource/list/"+idCurso;
+                           setTimeout(refrescarPagina,3000);
+                          window.location.replace(txt);
+                      }
+                      },
+                      {addClass: 'btn btn-danger', text: 'No', onClick: function ($noty) {
+                          $noty.close();
+                          noty({dismissQueue: true, force: true, layout: 'center', theme: 'defaultTheme', text: ':( !', type: 'error'});
+                      }
+                      }
+                  ]
+              });
+
+  }
+  function addResource(idCurso) {
+      var n = noty({
+                  text        : '¿Realmente desea agregar recursos?',
+                  type        : 'alert',
+                  dismissQueue: true,
+                  layout      : 'center',
+                  theme       : 'relax',
+                  buttons     : [
+                      {addClass: 'btn btn-primary', text: 'Si', onClick: function ($noty) {
+                          $noty.close();
+                          noty({dismissQueue: true, force: true, layout: 'center', theme: 'defaultTheme', text: ':) !', type: 'success'});
+                          var txt = "resource/show/"+idCurso;
+                           setTimeout(refrescarPagina,3000);
+                          window.location.replace(txt);
+                      }
+                      },
+                      {addClass: 'btn btn-danger', text: 'No', onClick: function ($noty) {
+                          $noty.close();
+                          noty({dismissQueue: true, force: true, layout: 'center', theme: 'defaultTheme', text: ':( !', type: 'error'});
+                      }
+                      }
+                  ]
+              });
+
+  }
+
+
+    /*Storage data using ajax*/
   $(document).ready(function() {
     $( "#resourceForm" ).submit(function( e ) {
 
@@ -319,6 +371,7 @@ function refrescarPagina(){
               },
               error: function(data) {
                   alert("error");
+                  alert(data);
                   setTimeout(refrescarPagina,3000);
               }
           });

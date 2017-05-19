@@ -48,7 +48,9 @@
     <div class="form-group">
       <label for="fechaFin">Notas:</label>
       <input type="text" class="form-control" id="notas"  name="notas">
-      <input type="hidden" class="form-control" id="id_usuario" value="  {{ Auth::user()->ID_USUARIO  }}"readonly name="id_usuario">
+      <input type="hidden" class="form-control" id="id_usuario" value="{{ Auth::user()->ID_USUARIO  }}"readonly name="id_usuario">
+      <input type="hidden" class="form-control" id="id_curso" value="{{ $curso }}"readonly name="id_curso">
+
     </div>
     <button type="submit" class="btn btn-default">Guardar</button>
 </div>

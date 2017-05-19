@@ -37,9 +37,9 @@ Route::get('/role/show', 'roleController@show');
 Route::post('/role/store', 'roleController@store');
 
 /*---------------------------------Resources  Routes-------------------------------------*/
-Route::get('resource/list', 'recursosController@showAll');
+Route::get('resource/list/{id_curso}', 'recursosController@showAll');
 
-Route::get('resource/show/{id_usuario}', 'recursosController@show');
+Route::get('resource/list/resource/show/{id_curso}', 'recursosController@show');
 
 Route::post('/resource/store','recursosController@store');
 
@@ -111,6 +111,11 @@ Route::get('/enroll/dd', function () {
          return view('content/enroll/dd');
 });
 
+/*FIN AMONTERO*/
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
 
 /*------------------------------Video-----------------------*/
 /*Pantalla de inicio*/
@@ -144,13 +149,3 @@ Route::post('download/', 'WSController@download');
 Route::post('play/', 'WSController@play');
 
 Route::get('get-video/{video}', 'WSController@getVideo')->name('getVideo');
-
-
-
-
-
-/*FIN AMONTERO*/
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');

@@ -43,6 +43,7 @@
 
                                 </tbody>
                               </table>
+                              <button  onclick="addResource({{ $data }})" class="fa fa-check-square-o" aria-hidden="true" id="agregarRecursos">Agregar</button>
                           </div>
                       </div>
                   </div>

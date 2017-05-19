@@ -9,16 +9,19 @@ use App\Http\Controllers\Auth;
 class recursosController extends Controller
 {
     //
-    public function showAll(){
-    $recursos =   DB::table('RECURSO AS R1')
+    public function showAll($id_curso){
+    $recursos = Recurso::orderBy('ID_RECURSO')->where('ID_CURSO',$id_curso)->get();
+    /*$recursos =   DB::table('RECURSO AS R1')
         ->join('TIPO_RECURSO', function ($join) {
             $join->on('TIPO_RECURSO.ID_TIPO_RECURSO', '=', 'R1.TIPO_RECURSO');
+
         })->join('RECURSO AS R2', function ($join2) {
             $join2->on('R2.ID_RECURSO', '=', DB::raw('ifnull(R1.RECURSO_PADRE,R2.ID_RECURSO)'));
         })
-
         ->select('TIPO_RECURSO.NOMBRE AS TIPO', DB::raw('ifnull(R2.NOMBRE,"NA") AS PADRE') , 'R2.ID_RECURSO AS ID', 'R2.*')
-        ->get();
+
+        ->get();*/
+        $data = $id_curso;
 
 
 
@@ -26,12 +29,13 @@ class recursosController extends Controller
     ->join('RECURSO AS R2' , 'R2.ID_RECURSO', '=', 'RECURSO.RECURSO_PADRE')->orOn('R2.ID_RECURSO','IS NULL')
     ->select('TIPO_RECURSO.NOMBRE AS TIPO', 'R2.NOMBRE AS PADRE', 'RECURSO.NOMBRE')
     ->get();*/
-     return view('content.resource.catalog', compact('recursos'));
+     return view('content.resource.catalog', compact('recursos','data'));
     }
-    function show($id_usuario){
+    function show($id_curso){
       $tipos = Tipo_Recurso::orderBy('ID_TIPO_RECURSO')->get();
-      $recursos = Recurso::orderBy('ID_RECURSO')->where('ID_USUARIO',$id_usuario)->get();
-      return view('content.resource.create', compact('tipos','recursos'));
+      $recursos = Recurso::orderBy('ID_RECURSO')->where('ID_CURSO',$id_curso)->get();
+      $curso = $id_curso;
+      return view('content.resource.create', compact('tipos','recursos','curso'));
     }
     function store(Request $request){
       $recurso= new Recurso;
@@ -45,6 +49,8 @@ class recursosController extends Controller
       $recurso->NOTAS = $request->notas;
       $recurso->ESTADO = 1;
       $recurso->ID_USUARIO = $request->id_usuario;
+      $recurso->ID_CURSO = $request->id_curso;
+
       $recurso->save();
       return response()->json("Recurso creado exitosamente");
     }

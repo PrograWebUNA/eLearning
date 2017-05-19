@@ -21,6 +21,7 @@
                                     @if(!roleController::hasRole(Auth::user()->ID_USUARIO,"ESTUDIANTE"))
                                     <th>Modificar</th>
                                     <th>Eliminar</th>
+                                    <th>Ver</th>
                                     @endif
                                  </tr>
                                 </thead>
@@ -35,6 +36,7 @@
                                     @if(!roleController::hasRole(Auth::user()->ID_USUARIO,"ESTUDIANTE"))
                                     <td><button  onclick="updateCourse({{ $course->ID_CURSO }})" class="fa fa-pencil" aria-hidden="true" id="modificar" title=""></button></td>
                                     <td><button  onclick="deleteCourse({{ $course->ID_CURSO }})" class="fa fa-trash-o" aria-hidden="true" id="eliminar"></button></td>
+                                    <td><button  onclick="showResources({{ $course->ID_CURSO }})" class="fa fa-eye" aria-hidden="true" id="ver"></button></td>
                                     @endif
                                   </tr>
                                 @endforeach
