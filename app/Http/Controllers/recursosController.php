@@ -18,35 +18,54 @@ use Input;
 use Session;
 class recursosController extends Controller
 {
+
+  /**
+  * @var SoapWrapper: objeto de conexion al servicio web
+  */
+  protected $soapWrapper;
+
+  /**
+  * SoapController constructor.
+  *
+  * @param SoapWrapper $soapWrapper
+  */
+  public function __construct(SoapWrapper $soapWrapper)
+  {
+  $this->soapWrapper = $soapWrapper;
+  }
+
 //
 public function showAll($id_curso){
-$recursos = Recurso::orderBy('ID_RECURSO')->where('ID_CURSO',$id_curso)->get();
-/*$recursos =   DB::table('RECURSO AS R1')
-->join('TIPO_RECURSO', function ($join) {
-$join->on('TIPO_RECURSO.ID_TIPO_RECURSO', '=', 'R1.TIPO_RECURSO');
+    $recursos = Recurso::orderBy('ID_RECURSO')->where('ID_CURSO',$id_curso)->get();
+    /*$recursos =   DB::table('RECURSO AS R1')
+    ->join('TIPO_RECURSO', function ($join) {
+    $join->on('TIPO_RECURSO.ID_TIPO_RECURSO', '=', 'R1.TIPO_RECURSO');
 
-})->join('RECURSO AS R2', function ($join2) {
-$join2->on('R2.ID_RECURSO', '=', DB::raw('ifnull(R1.RECURSO_PADRE,R2.ID_RECURSO)'));
-})
-->select('TIPO_RECURSO.NOMBRE AS TIPO', DB::raw('ifnull(R2.NOMBRE,"NA") AS PADRE') , 'R2.ID_RECURSO AS ID', 'R2.*')
+    })->join('RECURSO AS R2', function ($join2) {
+    $join2->on('R2.ID_RECURSO', '=', DB::raw('ifnull(R1.RECURSO_PADRE,R2.ID_RECURSO)'));
+    })
+    ->select('TIPO_RECURSO.NOMBRE AS TIPO', DB::raw('ifnull(R2.NOMBRE,"NA") AS PADRE') , 'R2.ID_RECURSO AS ID', 'R2.*')
 
+    ->get();*/
+    $data = $id_curso;
+
+
+
+    /*  $recursos = DB::table('RECURSO')->join('TIPO_RECURSO', 'TIPO_RECURSO.ID_TIPO_RECURSO', '=', 'RECURSO.TIPO_RECURSO')
+    ->join('RECURSO AS R2' , 'R2.ID_RECURSO', '=', 'RECURSO.RECURSO_PADRE')->orOn('R2.ID_RECURSO','IS NULL')
+    ->select('TIPO_RECURSO.NOMBRE AS TIPO', 'R2.NOMBRE AS PADRE', 'RECURSO.NOMBRE')
 ->get();*/
-$data = $id_curso;
-
-
-
-/*  $recursos = DB::table('RECURSO')->join('TIPO_RECURSO', 'TIPO_RECURSO.ID_TIPO_RECURSO', '=', 'RECURSO.TIPO_RECURSO')
-->join('RECURSO AS R2' , 'R2.ID_RECURSO', '=', 'RECURSO.RECURSO_PADRE')->orOn('R2.ID_RECURSO','IS NULL')
-->select('TIPO_RECURSO.NOMBRE AS TIPO', 'R2.NOMBRE AS PADRE', 'RECURSO.NOMBRE')
-->get();*/
-return view('content.resource.catalog', compact('recursos','data'));
+    return view('content.resource.catalog', compact('recursos','data'));
 }
+
+
 function show($id_curso){
   $tipos = Tipo_Recurso::orderBy('ID_TIPO_RECURSO')->get();
   $recursos = Recurso::orderBy('ID_RECURSO')->where('ID_CURSO',$id_curso)->get();
   $curso = $id_curso;
   return view('content.resource.create', compact('tipos','recursos','curso'));
   }
+
   function store(Request $request){
   $recurso= new Recurso;
   $recurso->TIPO_RECURSO = $request->tipo;
@@ -70,100 +89,91 @@ function show($id_curso){
   $mime = $file->getMimeType();
   /* se identifica el tipo de archivo. se requiere que el modulo extension=php_fileinfo.dll este descomentado en el
   php.ini*/
-  if ($mime == "video/x-flv" || $mime == "video/mp4" || $mime == "application/x-mpegURL" || $mime == "video/MP2T" || $mime == "video/3gpp" || $mime == "video/quicktime" || $mime == "video/x-msvideo" || $mime == "video/x-ms-wmv") {
-  // send back to the page with the input data and errors
   if( $request->tipo ==5){
-  if (Input::file('file')->isValid()) {
+    if ($mime == "video/x-flv" || $mime == "video/mp4" || $mime == "application/x-mpegURL" || $mime == "video/MP2T" || $mime == "video/3gpp" || $mime == "video/quicktime" || $mime == "video/x-msvideo" || $mime == "video/x-ms-wmv") {
+  // send back to the page with the input data and errors
+
+      if (Input::file('file')->isValid()) {
     //La ruta del repositorio es en C:\localRepository
-    $destinationPath = $localRepo = realpath('../../../../') . "\localRepository/" . "\\"; /* ruta del repositorio local para cargar el archivo y luego subirlo por el servicio*/
-    $extension = Input::file('file')->getClientOriginalExtension(); // obtiene la extension del archivo
-    $originalName = Input::file('file')->getClientOriginalName(); //obtiene el nombre original del archivo
-    $fileName = rand(11111,99999).'.'.$extension; // renombrar el archivo para subirlo al repositorio de forma temporal
-    Input::file('file')->move($destinationPath, $fileName); // subiendo el archivo al repositorio temporal
-    //Inicia conexion con el servicio web
-    $this->soapWrapper->add('video', function ($service) {
-      $service->wsdl("http://localhost:9999/MtomStreamingService?wsdl");
-      $service->trace(true);                                                   // Optional: (parameter: true/false)
-      $service->cache(WSDL_CACHE_NONE);                                        // Optional: Set the WSDL cache
+          $destinationPath = $localRepo = realpath('../../../../') . "\localRepository/" . "\\"; /* ruta del repositorio local para cargar el archivo y luego subirlo por el servicio*/
+          $extension = Input::file('file')->getClientOriginalExtension(); // obtiene la extension del archivo
+          $originalName = Input::file('file')->getClientOriginalName(); //obtiene el nombre original del archivo
+          $fileName = rand(11111,99999).'.'.$extension; // renombrar el archivo para subirlo al repositorio de forma temporal
+          Input::file('file')->move($destinationPath, $fileName); // subiendo el archivo al repositorio temporal
+          //Inicia conexion con el servicio web
+          $this->soapWrapper->add('video', function ($service) {
+            $service->wsdl("http://localhost:9999/MtomStreamingService?wsdl");
+            $service->trace(true);                                                   // Optional: (parameter: true/false)
+            $service->cache(WSDL_CACHE_NONE);                                        // Optional: Set the WSDL cache
 
-  });
-  //obtiene la ruta del repositorio local
-  $localRepo = realpath('../../../../') . "\localRepository/" . "\\";
-  //Indica el nombre del archivo original para enviarselo al WS
-  $Originalfilename = $originalName;
+        });
+        //obtiene la ruta del repositorio local
+        $localRepo = realpath('../../../../') . "\localRepository/" . "\\";
+        //Indica el nombre del archivo original para enviarselo al WS
+        $Originalfilename = $originalName;
 
-  //Le dice cual es el nombre del archivo que tiene en el repositorio
-  $fileRoot = $localRepo . $fileName;
-  //obtiene el archivo y lo transforma a bytes
-  $contents = file_get_contents($fileRoot);
+        //Le dice cual es el nombre del archivo que tiene en el repositorio
+        $fileRoot = $localRepo . $fileName;
+        //obtiene el archivo y lo transforma a bytes
+        $contents = file_get_contents($fileRoot);
 
-  $curso ="java";
-  //Carga los parametros del WS
-  // cargar los parametos y que se llamen igual a los de java
-  $course = Courses::find($request->id_curso);
-  $cursos=$course->NOMBRE;
-  $data = [
-  'nombreArchivo' => $Originalfilename,
-  'data'   => $contents,
-  'curso'=> $cursos
-  ];
-  /*Llama al servicio indicando el nombre del servicio, como le pusimos en el add y el nombre del metodo del servicio web*/
-  $this->soapWrapper->call('video.subir', $data);
-}else{
-    $nombre1 = $file->getClientOriginalName();
-     //indicamos que queremos guardar un nuevo archivo en el disco local
+        $curso ="java";
+        //Carga los parametros del WS
+        // cargar los parametos y que se llamen igual a los de java
+        $course = Courses::find($request->id_curso);
+        $cursos=$course->NOMBRE;
+        $data = [
+        'nombreArchivo' => $Originalfilename,
+        'data'   => $contents,
+        'curso'=> $cursos
+        ];
+        /*Llama al servicio indicando el nombre del servicio, como le pusimos en el add y el nombre del metodo del servicio web*/
+        $this->soapWrapper->call('video.subir', $data);
+}
 
-     echo ('<script>console.log("'.$nombre1.'")</script>');
-     Storage::put('text.pdf', $file);
+
+}
+
+}
+  if($request->tipo !=5){
+         //indicamos que queremos guardar un nuevo archivo en el disco local
+         Storage::put($file->getClientOriginalName(), $file);
   }
 
 
-
-
-  $recurso->save();
-  return view('content.resource.catalog');
+    $recurso->save();
+    return view('content.resource.catalog');
 }
+
+
+/*Revisen este metodo antes de hacer pull*/
 function update(Request $request){
-$recurso=  Recurso::find($request->ID_RECURSO);
-$recurso->TIPO_RECURSO = $request->tipo;
-$recurso->RECURSO_PADRE = $request->RECURSO_PADRE;
-$recurso->SEMANA = 1;
-$recurso->NOMBRE = $request->nombre;
-$recurso->URL = $request->url;
-$recurso->VISIBLE = $request->VISIBLE;
-$recurso->SECUENCIA = $request->secuencia;
-$recurso->NOTAS = $request->notas;
-$recurso->ESTADO = 1;
-$recurso->ID_USUARIO = $request->id_usuario;
+    $recurso=  Recurso::find($request->ID_RECURSO);
+    $recurso->TIPO_RECURSO = $request->tipo;
+    $recurso->RECURSO_PADRE = $request->RECURSO_PADRE;
+    $recurso->SEMANA = 1;
+    $recurso->NOMBRE = $request->nombre;
+    $recurso->URL = $request->url;
+    $recurso->VISIBLE = $request->VISIBLE;
+    $recurso->SECUENCIA = $request->secuencia;
+    $recurso->NOTAS = $request->notas;
+    $recurso->ESTADO = 1;
+    $recurso->ID_USUARIO = $request->id_usuario;
 
 }
 
-// devolviendo el mensaje de que se subio correctamente
-Session::flash('success', 'Upload successfully');
-return Redirect::to('uploadVideo');
-}
-else {
-// en caso de que el tipo de archivo sea invalido
-return Redirect::back()->withErrors(['msg', 'Tipo de archivo invalido']);
-
-}
 
 
 /*Fin */
 
 
-
-
-
-$recurso->save();
-return response()->json("Recurso actualizado correctamente!");
-}
 function getForUpdate($id,$idUsuario){
 $tipos = Tipo_Recurso::orderBy('ID_TIPO_RECURSO')->get();
 $recursos = Recurso::orderBy('ID_RECURSO')->where('ID_USUARIO',$idUsuario)->get();
 $recurso = Recurso::find($id);
 return view('content.resource.update', compact('recurso','tipos','recursos'));
 }
+
 public function delete($id){
 $recurso = Recurso::find($id);
 $recurso->delete();
@@ -171,20 +181,6 @@ return response()->json("El recurso se elimino correctamente!");
 }
 
 
-/**
-* @var SoapWrapper: objeto de conexion al servicio web
-*/
-protected $soapWrapper;
-
-/**
-* SoapController constructor.
-*
-* @param SoapWrapper $soapWrapper
-*/
-public function __construct(SoapWrapper $soapWrapper)
-{
-$this->soapWrapper = $soapWrapper;
-}
 
 /*Funcion que hace la carga de archivos*/
 public function upload(){
