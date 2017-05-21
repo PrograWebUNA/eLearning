@@ -80,12 +80,18 @@ function show($id_curso){
   $recurso->ID_USUARIO = $request->id_usuario;
   $recurso->ID_CURSO = $request->id_curso;
 
+
   /* Metodo de carga de archivo*/
 
   ini_set('memory_limit', '-1');
   // obteniendo la informacion del archivo
   $file = Input::file('file');
-  echo ("<script> alert('".$request->file."') </script>");
+  $splitName = explode('.', $file->getClientOriginalName(), 2);
+  
+  $recurso->NOMBRE_ARCHIVO=$splitName[0];
+  $recurso->EXTENSION_ARCHIVO=$splitName[1];
+
+
   $mime = $file->getMimeType();
   /* se identifica el tipo de archivo. se requiere que el modulo extension=php_fileinfo.dll este descomentado en el
   php.ini*/
@@ -117,7 +123,7 @@ function show($id_curso){
         //obtiene el archivo y lo transforma a bytes
         $contents = file_get_contents($fileRoot);
 
-        $curso ="java";
+
         //Carga los parametros del WS
         // cargar los parametos y que se llamen igual a los de java
         $course = Courses::find($request->id_curso);
