@@ -87,7 +87,7 @@ function show($id_curso){
   // obteniendo la informacion del archivo
   $file = Input::file('file');
   $splitName = explode('.', $file->getClientOriginalName(), 2);
-  
+
   $recurso->NOMBRE_ARCHIVO=$splitName[0];
   $recurso->EXTENSION_ARCHIVO=$splitName[1];
 
@@ -177,7 +177,8 @@ function getForUpdate($id,$idUsuario){
 $tipos = Tipo_Recurso::orderBy('ID_TIPO_RECURSO')->get();
 $recursos = Recurso::orderBy('ID_RECURSO')->where('ID_USUARIO',$idUsuario)->get();
 $recurso = Recurso::find($id);
-return view('content.resource.update', compact('recurso','tipos','recursos'));
+$nombreArchivo = $recurso->NOMBRE_ARCHIVO.'.'.$recurso->EXTENSION_ARCHIVO;
+return view('content.resource.update', compact('recurso','tipos','recursos','nombreArchivo'));
 }
 
 public function delete($id){

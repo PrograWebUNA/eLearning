@@ -63,6 +63,16 @@ Route::get('/users/modifyUser/{id}', 'usersController@showUser');
 
 Route::get('/users/deleteUser/{id}', 'usersController@delete');
 
+Route::get('/resource/update/1/public/docs/robots.txt', function()
+{
+    $foto="";
+    $path = storage_path().'robots.txt';
+     if (file_exists($path)) {
+        return Response::download($path);
+    }
+});
+
+
 /*-----------------------------------------------------------------------------------*/
 
 

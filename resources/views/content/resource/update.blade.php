@@ -51,6 +51,12 @@
       <input type="text" class="form-control" id="notas"  name="notas" value="{{$recurso->NOTAS}}">
       <input type="hidden" class="form-control" id="id_usuario" value="  {{ Auth::user()->ID_USUARIO  }}"readonly name="id_usuario">
     </div>
+    <div class="form-group">
+      <label for="Docs">Documentos:</label>
+    <a href="{{url('docs/'.$nombreArchivo)}}" target="_blank">Ver Documento</a>
+    </div>
+
+
     <button type="submit" class="btn btn-default">Guardar</button>
 </div>
 </form>
