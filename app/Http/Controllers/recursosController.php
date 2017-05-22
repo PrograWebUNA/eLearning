@@ -80,6 +80,7 @@ function show($id_curso){
   $recurso->ID_USUARIO = $request->id_usuario;
   $recurso->ID_CURSO = $request->id_curso;
 
+  $TIPO_RECURSO=$request->tipo;
 
   /* Metodo de carga de archivo*/
 
@@ -95,7 +96,7 @@ function show($id_curso){
   $mime = $file->getMimeType();
   /* se identifica el tipo de archivo. se requiere que el modulo extension=php_fileinfo.dll este descomentado en el
   php.ini*/
-  if( $request->tipo ==5){
+  if( $TIPO_RECURSO ==5){
     if ($mime == "video/x-flv" || $mime == "video/mp4" || $mime == "application/x-mpegURL" || $mime == "video/MP2T" || $mime == "video/3gpp" || $mime == "video/quicktime" || $mime == "video/x-msvideo" || $mime == "video/x-ms-wmv") {
   // send back to the page with the input data and errors
 
@@ -131,7 +132,8 @@ function show($id_curso){
         $data = [
         'nombreArchivo' => $Originalfilename,
         'data'   => $contents,
-        'curso'=> $cursos
+        'curso'=> $cursos,
+        'recurso'=>$TIPO_RECURSO
         ];
         /*Llama al servicio indicando el nombre del servicio, como le pusimos en el add y el nombre del metodo del servicio web*/
         $this->soapWrapper->call('video.subir', $data);
@@ -141,9 +143,9 @@ function show($id_curso){
 }
 
 }
-  if($request->tipo !=5){
+  if($TIPO_RECURSO !=5){
          //indicamos que queremos guardar un nuevo archivo en el disco local
-         Storage::put($file->getClientOriginalName(), $file);
+             Storage::put($file->getClientOriginalName(),$file);
   }
 
 
@@ -177,8 +179,62 @@ function getForUpdate($id,$idUsuario){
 $tipos = Tipo_Recurso::orderBy('ID_TIPO_RECURSO')->get();
 $recursos = Recurso::orderBy('ID_RECURSO')->where('ID_USUARIO',$idUsuario)->get();
 $recurso = Recurso::find($id);
-$nombreArchivo = $recurso->NOMBRE_ARCHIVO.'.'.$recurso->EXTENSION_ARCHIVO;
-return view('content.resource.update', compact('recurso','tipos','recursos','nombreArchivo'));
+
+
+if($recurso->TIPO_RECURSO==5){
+
+  //setea un tiempo limite para descargar 300 segundos = 5 minutos
+  set_time_limit(300);
+
+  ini_set('memory_limit', '-1');
+  //obtiene de pantalla el archivo que se quiere descargar
+  $filename = $recurso->NOMBRE_ARCHIVO.".".$recurso->EXTENSION_ARCHIVO;
+  //agrega el servicio con el nombre video y utiliza el wsdl para traerse la ruta
+  $this->soapWrapper->add('video', function ($service) {
+  $service->wsdl("http://localhost:9999/MtomStreamingService?wsdl");
+  $service->trace(true);                                                   // Optional: (parameter: true/false)
+  $service->cache(WSDL_CACHE_NONE);                                        // Optional: Set the WSDL cache
+
+  });
+
+  //cargar los parametros para el metodo del WS
+
+  $tipo_recurso =$recurso->TIPO_RECURSO;
+  $data = [
+    'nombreArchivo' => $filename,
+    'recurso'=> $tipo_recurso
+  ];
+
+  /*Llama al servicio indicando el nombre del servicio, como le pusimos en el add y el nombre del metodo del servicio web*/
+  $resultado = $this->soapWrapper->call('video.descargar', $data);
+
+
+  //transforma el archivo de bytes a un archivo fisico
+  $file = file_put_contents($filename, $resultado->return);
+
+  $extension = $recurso->EXTENSION_ARCHIVO;
+  $tmpName = rand(11111,99999).'.'.$extension;
+  //lo almacena para reproducir en el storage de laravel local
+  Storage::put($tmpName, $resultado->return);
+
+
+  //le envia el parametro al reproductor para indicar cual debe reproducir
+  $parameters = [
+  'file' => $tmpName
+  ];
+  /*llama a la pagina de reproduccion de video*/
+  return view('content.resource.updateVideo', compact('recurso','tipos','recursos'));
+}
+
+if($recurso->TIPO_RECURSO!=5){
+
+  $nombreArchivo = $recurso->NOMBRE_ARCHIVO.'.'.$recurso->EXTENSION_ARCHIVO;
+  return view('content.resource.update', compact('recurso','tipos','recursos','nombreArchivo'));
+
+}
+
+
+
 }
 
 public function delete($id){
@@ -309,7 +365,7 @@ readfile($filename);
 public function play(Request $request){
 //setea un tiempo limite para descargar 300 segundos = 5 minutos
 set_time_limit(300);
-
+echo("HOlaaa");
 ini_set('memory_limit', '-1');
 //obtiene de pantalla el archivo que se quiere descargar
 $filename = $request->input('nombre');

@@ -56,6 +56,11 @@
     <a href="{{url('docs/'.$nombreArchivo)}}" target="_blank">Ver Documento</a>
     </div>
 
+    <div class="form-group">
+      <label >Video:</label>
+      <a href="play" class="btn btn-primary">Reproducir</a>
+    </div>
+
 
     <button type="submit" class="btn btn-default">Guardar</button>
 </div>

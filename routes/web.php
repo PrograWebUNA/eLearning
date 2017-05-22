@@ -47,6 +47,8 @@ Route::post('/resource/update','recursosController@update');
 
 Route::get('/resource/update/{id}/{idUsuario}', 'recursosController@getForUpdate');
 
+Route::get('/resource/updateVideo/{id}/{idUsuario}', 'recursosController@getForUpdate');
+
 Route::get('/resource/delete/{id}', 'recursosController@delete');
 
 /* FIN ASANCHEZ*/
